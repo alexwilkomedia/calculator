@@ -1,0 +1,566 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Methotrexate Calculator</title>    
+    <link rel="stylesheet" href="style.css" type="text/css">
+
+    <script type="text/javascript">
+	 
+		  function id(element)
+		  {
+            return document.getElementById(element);
+        }
+
+        function convertWeight()
+		  {
+            var poundsstr = id('wt').value;
+            if (poundsstr == '') { alert('Please enter a valid weight'); return; }
+            var pounds = parseFloat(poundsstr);
+            if (isNaN(pounds)) pounds = 0;
+            var kgs = pounds * 0.45359237;
+            kgs = Math.round(kgs * 100) / 100;          
+            kgs = Math.round(kgs * 10) / 10; //one decimal place
+            
+				id("weight").value = kgs;
+        }
+		  
+        function convertHeight()
+		  {
+            var inchesstr = id('ht').value;
+            if (inchesstr == '') { alert('Please enter a valid height'); return; }
+            var inches = parseFloat(inchesstr);
+            if (isNaN(inches)) inches = 0;
+            var cms = inches * 2.54;
+            cms = Math.round(cms * 10) / 10; //one decimal place
+
+            id("height").value = cms;
+        }
+
+        function clearing()
+		  {
+				id("alcohol").value = "non";
+				id("name").value = "";
+            id("age").value = "";
+            id("year").value = "";
+            id("month").value = "";
+            id("day").value = "";
+				id("height").value = "";
+				id("weight").value = "";
+				id("male").checked = false;
+				id("female").checked = false;
+				id("nonsmoker").checked = true;
+				id("artno").checked = true;
+				id("psono").checked = true;
+				id("polyno").checked = true;
+				id("tissueno").checked = true;
+				id("statinno").checked = true;
+				id("aspirinno").checked = true;
+				id("parano").checked = true;
+				id("liverno").checked = true;
+				id("otherno").checked = true;
+				id("diabetesno").checked = true;
+				id("kidneyno").checked = true;
+				id("hydrono").checked = true;
+				id("sulfno").checked = true;
+				id("steroidno").checked = true;
+				id("protonno").checked = true;
+				id("antino").checked = true;
+				
+				id("result").style="display:none";
+        }
+		  
+		  function calculate()
+		  {
+				if(!id("year").value ||
+					!id("month").value ||
+					!id("day").value ||
+					!id("weight").value ||
+					!id("height").value ||
+					!id("dose").value
+				  )
+				{
+					alert("Please answer all questions below.");
+					return;
+				}
+				
+				var dose = id("dose").value/7;
+				var age  = (new Date()-new Date(id("year").value+"-"+id("month").value+"-"+id("day").value))/1000/3600/24/365.25;
+				var bmi = id("weight").value/id("height").value**2*10000;
+			
+				var result =
+					0.0111752*dose + 
+				  -0.0005886*age  +
+				  -0.0100983*bmi +
+				  -0.0412595*id("female").checked +
+					0.0545787*id("smoker").checked +
+				  -0.0555338*(id("alcohol").value=="non") +
+				  -0.0745235*(id("alcohol").value=="low") +
+				  -0.2376144*(id("alcohol").value=="medium") +
+					0.1062592*(id("alcohol").value=="high") +
+					0.2225364*id("diabetesyes").checked +
+					0.7005654*id("kidneyyes").checked +
+					0.0170423*id("protonyes").checked +
+					0.5164347*id("antiyes").checked +
+					0.1021201*id("statinyes").checked +
+				  -0.0334514*id("aspirinyes").checked +
+					0.1608563*id("parayes").checked +
+				  -0.1073611*id("hydroyes").checked +
+				  -0.0791611*id("sulfyes").checked +
+					0.1000699*id("steroidyes").checked +
+					0.1339634*id("psoyes").checked +
+				  -0.0111359*id("polyyes").checked +
+					0.2919058*id("tissueyes").checked +
+					0.2636568*id("otheryes").checked +
+					1.0863890*id("liveryes").checked;
+				
+				id("result").style="display:block";
+				id("bmi").innerText = "BMI: "+bmi.toFixed(1);
+				id("risk").innerText = "Risk: "+((1-(0.895**Math.exp(0.93*result)))*100).toFixed(2)+"%";
+		  }
+
+    </script>
+
+    <style type="text/css">
+        @media print {
+            #banner, #menu, #language, #rightdiv_tool, #footer, .noPrint{ display: none; }
+            #container { border: none; }
+            .result-wrap {
+                width: 275px;
+                font-size: 14px;
+            }
+            .result-header { color: #FFED00; }
+            .result-text, .result-score { border: 1px solid #CCC; }
+        }
+    </style>
+
+</head>
+
+<body>
+  <div id="wrap">
+		<div id="banner">
+			 <img id="bone" src="logo.png" alt="">
+			 <div id="ref-title">
+				<span class="ref-text">Calculator Risk Assessment Tool</span>
+			 </div>
+
+		</div>
+  
+		<div id="menu">
+		 <ul>
+			  <li class="short"><a href="/">Home</a></li>
+		 </ul>
+		 <ul>
+			  <li class="wide"><a href="" class="droplink" onclick="return false">Calculation Tools</a>
+					<ul id="calc_countries">
+						 <li><a href="" class="sublink" onclick="return false">Methotrexate</a></li>
+						 <li><a href="/sulfasalazine" class="sublink" onclick="return false">Sulfasalazine</a></li>
+						 <li><a href="/thiopurine" class="sublink" onclick="return false">Thiopurine</a></li>
+						 <li><a href="/leflunomide" class="sublink" onclick="return false">Leflunomide</a></li>
+					</ul>
+			  </li>
+		 </ul>
+		 <ul>
+			  <li><a href="/video.html">Video</a></li>
+		 </ul>
+	 </div>
+                
+    <div id="container">                           
+        <div id="content">
+            <span id="timer"></span>
+            <div id="rightdiv_tool">
+				
+                <div style="border: 1px solid #ccc; background: #FFF; padding: 20px; margin-top: 71px; margin-bottom:255px">
+                    <h2>Weight Conversion</h2>
+                    <p><b>Pounds</b> <img src="calc_arrow.png" style="margin: 0 10px 0 10px;" alt=""> <b>kg</b></p>
+
+                    <table class="convert"><tbody><tr><td>
+                        <input type="text" id="wt" style="width: 60px;">
+                    </td><td>
+                        <button type="submit" onclick="convertWeight(); return false;">Convert</button>
+                    </td></tr></tbody></table>
+
+                    <br><br><br>
+
+                    <h2>Height Conversion</h2>
+                    <p><b>Inches</b> <img src="calc_arrow.png" style="margin: 0 10px -2px 10px;" alt=""> <b>cm</b></p>
+
+                    <table class="convert"><tbody><tr><td>
+                        <input type="text" id="ht" style="width: 60px;">
+                    </td><td>
+                        <button type="submit" onclick="convertHeight(); return false;">Convert</button>
+                    </td></tr></tbody></table>
+
+                </div>
+            </div>
+
+            <div>
+                <h1>Calculation Tool</h1>
+            </div>
+
+            <p>Please answer the questions below to calculate the risk.</p>                        
+
+            <div id="ctl00_ContentPlaceHolder1_updCongrats">
+	                        
+                    
+                
+</div>
+            <!------------------------------------------>
+            <!--                Tool                  -->
+            <!------------------------------------------>
+            <div id="tool-wrap">    
+                <!------------------------------------------>
+                <!--                Header                -->
+                <!------------------------------------------>
+                <div class="tool-header">
+                    <div class="name">Name/ID: <input type="text" id="name"></div> 
+                </div>
+                <!------------------------------------------>
+                <!--            LEFT CONTENT              -->
+                <!------------------------------------------>
+                <div class="tool-content-left">
+                    <div class="tool-title">Questionnaire:</div>
+                    <!-- Age -->
+                    <div class="input-wrap">
+                        <div class="title full">
+                            <div class="question-number">1.</div>
+                            <div class="question-text long">Age or Date of Birth</div>
+                        </div>  
+                        <div class="input age-wrap">  
+                            <div class="custom-label">Age:</div>  
+                            <input name="age" type="text" id="age" maxlength="5" size="3" style="width:40px;" disabled>  
+                        </div>
+
+                        <div class="input dob-wrap">
+                            <div class="custom-label">Date of Birth:</div>
+                            <div class="dob">Y: <input name="year" type="text" id="year" maxlength="4" size="4" style="width:40px;"></div>
+                            <div class="dob">M: <input name="month" type="text" id="month" maxlength="2" size="2" style="width:30px;"></div> 
+                            <div class="dob">D: <input name="day" type="text" id="day" maxlength="2" size="2" style="width:30px;"></div> 
+                        </div>
+                    </div>
+                    <!-- Sex -->
+                    <div class="input-wrap">
+                        <div class="title short">
+                            <div class="question-number">2.</div>
+                            <div class="question-text">Sex</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input value="male" name="sex" type="radio" id="male" checked><label for="male">Male</label></div>
+                            <div class="radio"><input value="female" name="sex" type="radio" id="female"><label for="female">Female</label></div>
+                        </div>
+                    </div>
+						  <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">3.</div>
+                            <div class="question-text">Weekly methotrexate dose (mg)</div>
+                        </div>
+                        <div class="input">
+                            <input name="dose" type="text" id="dose" maxlength="5" size="7">
+                        </div>
+                    </div>
+                    <!-- Weight -->
+                    <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">4.</div>
+                            <div class="question-text">Weight (kg)</div>
+                        </div>
+                        <div class="input">
+                            <input name="weight" type="text" id="weight" maxlength="5" size="7">
+                        </div>
+                    </div>
+                    <!-- Height -->
+                    <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">5.</div>
+                            <div class="question-text">Height (cm)</div>
+                        </div>
+                        <div class="input">
+                            <input name="height" type="text" id="height" maxlength="5" size="7">
+                        </div>
+                    </div>
+                    <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">6.</div>
+                            <div class="question-text">Smoking Status</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="smoke" type="radio" id="nonsmoker" checked><label for="nonsmoker">No</label></div>
+                            <div class="radio"><input name="smoke" type="radio" id="smoker"><label for="smoker">Yes</label></div>
+                        </div>
+                    </div>
+                    <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">7.</div>
+                            <div class="question-text">Rheumatoid arthritis</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="arthritis" type="radio" id="artno" checked><label for="artno">No</label></div>
+                            <div class="radio"><input name="arthritis" type="radio" id="artyes"><label for="artyes">Yes</label></div>
+                        </div>
+                    </div>
+                    <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">8.</div>
+                            <div class="question-text">Psoriasis or Psoriatic arthritis</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="psoriasis" type="radio" id="psono" checked><label for="psono">No</label></div>
+                            <div class="radio"><input name="psoriasis" type="radio" id="psoyes"><label for="psoyes">Yes</label></div>
+                        </div>
+                    </div>
+                    <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">9.</div>
+                            <div class="question-text">Polymyalgia rheumatica</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="poly" type="radio" id="polyno" checked><label for="polyno">No</label></div>
+                            <div class="radio"><input name="poly" type="radio" id="polyyes"><label for="polyyes">Yes</label></div>
+                        </div>
+                    </div>
+                    <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">10.</div>
+                            <div class="question-text">Connective tissue disease</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="tissue" type="radio" id="tissueno" checked><label for="tissueno">No</label></div>
+                            <div class="radio"><input name="tissue" type="radio" id="tissueyes"><label for="tissueyes">Yes</label></div>
+                        </div>
+                    </div>
+						  <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">11.</div>
+                            <div class="question-text">Statins</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="statin" type="radio" id="statinno" checked><label for="statinno">No</label></div>
+                            <div class="radio"><input name="statin" type="radio" id="statinyes"><label for="statinyes">Yes</label></div>
+                        </div>
+                    </div>
+						  <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">12.</div>
+                            <div class="question-text">NSAIDs/high dose aspirin</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="aspirin" type="radio" id="aspirinno" checked><label for="aspirinno">No</label></div>
+                            <div class="radio"><input name="aspirin" type="radio" id="aspirinyes"><label for="aspirinyes">Yes</label></div>
+                        </div>
+                    </div>
+						  <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">13.</div>
+                            <div class="question-text">Paracetamol</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="para" type="radio" id="parano" checked><label for="parano">No</label></div>
+                            <div class="radio"><input name="para" type="radio" id="parayes"><label for="parayes">Yes</label></div>
+                        </div>
+                    </div>
+						  <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">14.</div>
+                            <div class="question-text">Cytopenia or liver enzyme elevation</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="liver" type="radio" id="liverno" checked><label for="liverno">No</label></div>
+                            <div class="radio"><input name="liver" type="radio" id="liveryes"><label for="liveryes">Yes</label></div>
+                        </div>
+                    </div>
+                </div> 
+                <!------------------------------------------>
+                <!--            RIGHT CONTENT             -->
+                <!------------------------------------------>
+                <div class="tool-content-right">
+                    <!-- Secondary Osteoporosis -->
+                    <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">15.</div>
+                            <div class="question-text">Other seronegative spondylarthrosis</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="other" type="radio" id="otherno" checked><label for="otherno">No</label></div>
+                            <div class="radio"><input name="other" type="radio" id="otheryes"><label for="otheryes">Yes</label></div>
+                        </div>
+                    </div>
+                    <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">16.</div>
+                            <div class="question-text">Diabetes mellitus</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="diabetes" type="radio" id="diabetesno" checked><label for="diabetesno">No</label></div>
+                            <div class="radio"><input  name="diabetes" type="radio" id="diabetesyes"><label for="diabetesyes">Yes</label></div>
+                        </div>
+                    </div>
+						  <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">17.</div>
+                            <div class="question-text">Chronic kidney disease stage 3</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="kidney" type="radio" id="kidneyno" checked><label for="kidneyno">No</label></div>
+                            <div class="radio"><input name="kidney" type="radio" id="kidneyyes"><label for="kidneyyes">Yes</label></div>
+                        </div>
+                    </div>
+						  <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">18.</div>
+                            <div class="question-text">Hydroxychloroquine</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="hydro" type="radio" id="hydrono" checked><label for="hydrono">No</label></div>
+                            <div class="radio"><input name="hydro" type="radio" id="hydroyes"><label for="hydroyes">Yes</label></div>
+                        </div>
+                    </div>
+						  <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">19.</div>
+                            <div class="question-text">Sulfasalazine and/or 5-Aminosalicylates</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="sulf" type="radio" id="sulfno" checked><label for="sulfno">No</label></div>
+                            <div class="radio"><input name="sulf" type="radio" id="sulfyes"><label for="sulfyes">Yes</label></div>
+                        </div>
+                    </div>
+						  <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">20.</div>
+                            <div class="question-text">Steroid-sparing immune suppressing agents</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="steroid" type="radio" id="steroidno" checked><label for="steroidno">No</label></div>
+                            <div class="radio"><input name="steroid" type="radio" id="steroidyes"><label for="steroidyes">Yes</label></div>
+                        </div>
+                    </div>
+						  <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">21.</div>
+                            <div class="question-text">Proton pump inhibitors  </div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="proton" type="radio" id="protonno" checked><label for="protonno">No</label></div>
+                            <div class="radio"><input name="proton" type="radio" id="protonyes"><label for="protonyes">Yes</label></div>
+                        </div>
+                    </div>
+						  <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">22.</div>
+                            <div class="question-text">Anti-epileptic drugs </div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="anti" type="radio" id="antino" checked><label for="antino">No</label></div>
+                            <div class="radio"><input name="anti" type="radio" id="antiyes"><label for="antiyes">Yes</label></div>
+                        </div>
+                    </div>
+                    <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">23.</div>
+                            <div class="question-text">Alcohol Use</div>
+                        </div>
+								 <div class="input">
+									  <select id="alcohol" name="alcohol" >
+											<option value="non">Non-user</option>
+											<option value="low">Low</option>
+											<option value="medium">Moderate</option>
+											<option value="high">Hazardous</option>
+											<option value="ex">Ex-user</option>
+									  </select>
+								 </div>
+                    </div>
+
+                    <div id="ctl00_ContentPlaceHolder1_updResult">
+	
+                            <!-- Buttons -->
+                            <div style="width: 295px; text-align: center; margin-top: 5px;">
+                                <input type="submit" onclick="clearing(); return false;" value="Clear">                               
+                                <input type="submit" onclick="calculate(); return false;" value="Calculate">
+                            </div>
+
+                            <!-- Results -->
+									 <div id="result" style="display: none">
+	
+                                <div class="result-outter">
+                                    <img src="resultBackground.jpg" style="position: absolute; left: 0; top: 0; border: 0;" alt="Background Image">
+                                    <div class="result-wrap">
+													 <!-- Result Header -->
+                                        <div class="result-header">
+                                            <span id="bmi" class="bmi"></span>
+                                        </div> 
+                                        <!-- Result Content -->
+                                        <div class="result-content" id="risk">
+                                        </div>
+                                    </div>
+                                </div>
+									</div>
+						  </div>
+                </div>
+            </div>
+            <!-- End Tool -->
+            <p class="noPrint" style="text-align:right;margin-bottom:0;width:660px;"><a href="" onclick="window.print(); return false;" style="vertical-align:top;line-height:31px;color:#0C23FA;"><img src="printer.png" style="padding-right:5px;vertical-align:middle;">Print tool and information</a></p>
+            <div id="noPrint">
+                <h2 class="large">Risk factors</h2>
+                <p>For the clinical risk factors a yes or no response is asked for. If the field is left blank, then a "no" response is assumed.<br><br>The risk factors used are the following:</p>
+
+                <br>
+
+                <table class="tool">
+                <tbody><tr>
+                    <td>Age</td>
+                    <td>The age of the patient</td>
+                </tr>
+                <tr>
+                    <td>Sex</td>
+                    <td>Male or female. Enter as appropriate.</td>
+                </tr>
+                <tr>
+                    <td>Weight</td>
+                    <td>This should be entered in kg.</td>
+                </tr>
+                <tr>
+                    <td>Height</td>
+                    <td>This should be entered in cm.</td>
+                </tr>
+
+                <tr>
+                    <td>Current smoking</td>
+                    <td>Enter yes or no depending on whether the patient currently smokes tobacco (see also notes on risk factors).</td>
+                </tr>
+                <tr>
+                    <td>Rheumatoid arthritis</td>
+                    <td>Enter yes where the patient has a confirmed diagnosis of rheumatoid arthritis. Otherwise enter no (see also notes on risk factors).</td>
+                </tr>
+					 <tr>
+                    <td>Connective Tissue Disease</td>
+                    <td>include lupus, systemic sclerosis, myositis, small vessel vasculitis; </td>
+                </tr>
+					 <tr>
+						<td>Other seronegative spondyloarthritis</td>
+						<td>include ankyolosing spondylitis, reactive arthritis and inflammatory bowel disease</td>
+					 </tr>
+					 <tr>
+						<td>Chronic kidney disease</td>
+						<td>Patients with chronic kidney disease stage 4 or 5 were excluded and the model should not be applied to them</td>
+					 </tr>
+					 <tr>
+						<td>Other immune suppressing steroid-sparing agents</td>
+						<td>include leflunomide, azathioprine, cyclosporine, tacrolimus</td>
+					 </tr>
+					 <tr>
+						<td>Anti-epileptic drugs</td>
+						<td>include carbamazepine, levetiracetam, and sodium valproate</td>
+					 </tr>
+					 <tr>
+						<td>Blood test abnormality in 6 months of primary care prescription</td>
+						<td>was defined as either cytopenia (neutrophil count <2 x 109/l, total leucocyte count <4 x 109/l, or platelet count <150 109/l) or elevated transaminase (ALT and/or AST >35 IU/l) during the first 6 months of primary-care methotrexate prescription. If methotrexate is always prescribed from a hospital or specialist clinic, this parameter should be evaluated during first six month of methotrexate prescription at a stable dose</td>
+					 </tr>
+                </tbody></table>
+                <a name="notes" id="notes"></a>
+
+            </div>
+        </div> <!-- content -->
+           
+    </div> <!-- container -->     
+          
+  </div>
+</body>
+</html>
