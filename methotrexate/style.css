@@ -299,7 +299,7 @@ ul.country-menu li, ul.country-menu li a {float: left !important; width: 150px !
 
 /****************************** INPUTS AND FORMS ******************************/
 
-input[type="text"], textarea, select {
+input[type="text"], input[type="number"], textarea, select {
     color: #666;
     border: 1px solid #bbb;
     padding: 3px 5px;
@@ -391,6 +391,11 @@ table.convert { border-spacing: 0px; border-collapse: collapse; width: 100%; }
 .input-wrap .input input[type="text"] {
     padding: 3px;
     margin: 1px 0;
+}
+
+input[type="number"] 
+{
+   width: 50px;
 }
 
 .t-score { float: left; font-size: 14px; padding: 2px 5px; }
@@ -492,4 +497,10 @@ table.convert { border-spacing: 0px; border-collapse: collapse; width: 100%; }
 
 #cemarkTable th, #cemarkTable td {
     padding: 5px;
+}
+
+.date
+{
+	float: right;
+	padding: 4px;
 }
