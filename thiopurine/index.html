@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Methotrexate Calculator</title>    
+<title>Thiopurine Calculator</title>    
     <link rel="stylesheet" href="style.css" type="text/css">
 
     <script type="text/javascript">
@@ -41,80 +41,77 @@
 				id("ht").disabled = false;
 				id("alcohol").disabled = false;
 				id("name").disabled = false;
-				id("dose").disabled = false;
             id("age").disabled = false;
             id("year").disabled = false;
             id("month").disabled = false;
             id("day").disabled = false;
 				id("height").disabled = false;
 				id("weight").disabled = false;
+				id("azadose").disabled = false;
+				id("merdose").disabled = false;
 				id("male").disabled = false;
 				id("female").disabled = false;
-				id("smoker").disabled = false;
-				id("nonsmoker").disabled = false;
 				id("artyes").disabled = false;
 				id("artno").disabled = false;
-				id("psoyes").disabled = false;
-				id("psono").disabled = false;
-				id("polyyes").disabled = false;
-				id("polyno").disabled = false;
-				id("tissueyes").disabled = false;
-				id("tissueno").disabled = false;
 				id("statinyes").disabled = false;
 				id("statinno").disabled = false;
-				id("aspirinyes").disabled = false;
-				id("aspirinno").disabled = false;
-				id("parayes").disabled = false;
-				id("parano").disabled = false;
-				id("liveryes").disabled = false;
-				id("liverno").disabled = false;
-				id("bowelyes").disabled = false;
-				id("bowelno").disabled = false;
 				id("diabetesyes").disabled = false;
 				id("diabetesno").disabled = false;
 				id("kidneyyes").disabled = false;
 				id("kidneyno").disabled = false;
-				id("hydroyes").disabled = false;
-				id("hydrono").disabled = false;
+				id("nonsmoker").disabled = false;
+				id("smoker").disabled = false;
+				id("bloodyes").disabled = false;
+				id("bloodno").disabled = false;
+				id("aminoyes").disabled = false;
+				id("aminono").disabled = false;
 				id("sulfyes").disabled = false;
 				id("sulfno").disabled = false;
-				id("steroidyes").disabled = false;
-				id("steroidno").disabled = false;
-				id("protonyes").disabled = false;
-				id("protonno").disabled = false;
-				id("antiyes").disabled = false;
-				id("antino").disabled = false;
+				id("allono").disabled = false;
+				id("alloyes").disabled = false;
+				id("aceno").disabled = false;
+				id("aceyes").disabled = false;
+				id("sysno").disabled = false;
+				id("sysyes").disabled = false;
+				id("methono").disabled = false;
+				id("methoyes").disabled = false;
+				id("sulfno").disabled = false;
+				id("sulfyes").disabled = false;
+				id("allono").disabled = false;
+				id("alloyes").disabled = false;
+				id("reactiveno").disabled = false;
+				id("reactiveyes").disabled = false;
+				id("bowelno").disabled = false;
+				id("bowelyes").disabled = false;
 				
 				id("wt").value = "";
 				id("ht").value = "";
 				id("alcohol").value = "non";
 				id("name").value = "";
-				id("dose").value = "";
             id("age").value = "";
             id("year").value = "";
             id("month").value = "";
             id("day").value = "";
 				id("height").value = "";
 				id("weight").value = "";
+				id("azadose").value = "";
+				id("merdose").value = "";
 				id("male").checked = false;
 				id("female").checked = false;
-				id("nonsmoker").checked = true;
 				id("artno").checked = true;
-				id("psono").checked = true;
-				id("polyno").checked = true;
-				id("tissueno").checked = true;
 				id("statinno").checked = true;
-				id("aspirinno").checked = true;
-				id("parano").checked = true;
-				id("liverno").checked = true;
-				id("bowelno").checked = true;
 				id("diabetesno").checked = true;
 				id("kidneyno").checked = true;
-				id("hydrono").checked = true;
+				id("nonsmoker").checked = true;
+				id("bloodno").checked = true;
+				id("aceno").checked = true;
+				id("sysno").checked = true;
+				id("methono").checked = true;
+				id("aminono").checked = true;
 				id("sulfno").checked = true;
-				id("steroidno").checked = true;
-				id("protonno").checked = true;
-				id("antino").checked = true;
+				id("allono").checked = true;
+				id("reactiveno").checked = true;
+				id("bowelno").checked = true;
 				
 				id("result").style = "display:none";
 				id("date").innerText = "";
@@ -126,10 +123,11 @@
 				var month = Math.floor(id("month").value);
 				var day = Math.floor(id("day").value);
 				
-				var dose = id("dose").value/7;
 				var bmi = id("weight").value/id("height").value**2*10000;
 				
-				if(!id("name").value || !id("weight").value || !id("height").value || !id("dose").value)
+				var dose = id("azadose").value?id("azadose").value/2.08:0 + id("merdose").value?id("merdose").value/1.00:0;
+				
+				if(!id("name").value || !id("weight").value || !id("height").value)
 				{
 					alert("Please answer all questions below.");
 					return;
@@ -181,96 +179,88 @@
 					return;
 				}
 				
-				if(7*dose<2.5 || 7*dose>25)
-				{
-					alert("The weekly dose must be at least 2.5mg and must not exceed 25mg");
-					return
-				}
-				
 				if(!id("male").checked && !id("female").checked)
 				{
 					alert("Please select the biological sex of the patient");
 					return;
 				}
+				
+				/*if(7*dose<2.5 || 7*dose>25)
+				{
+					alert("The weekly dose must be at least 2.5mg and must not exceed 25mg");
+					return
+				}*/
 			
 				var result =
-					0.0111752*dose + 
-				  -0.0005886*age  +
-				  -0.0100983*bmi +
-				  -0.0412595*id("female").checked +
-					0.0545787*id("smoker").checked +
-				  -0.0555338*(id("alcohol").value=="non") +
-				  -0.0745235*(id("alcohol").value=="low") +
-				  -0.2376144*(id("alcohol").value=="medium") +
-					0.1062592*(id("alcohol").value=="high") +
-					0.2225364*id("diabetesyes").checked +
-					0.7005654*id("kidneyyes").checked +
-					0.0170423*id("protonyes").checked +
-					0.5164347*id("antiyes").checked +
-					0.1021201*id("statinyes").checked +
-				  -0.0334514*id("aspirinyes").checked +
-					0.1608563*id("parayes").checked +
-				  -0.1073611*id("hydroyes").checked +
-				  -0.0791611*id("sulfyes").checked +
-					0.1000699*id("steroidyes").checked +
-					0.1339634*id("psoyes").checked +
-				  -0.0111359*id("polyyes").checked +
-					0.2919058*id("tissueyes").checked +
-					0.2636568*id("bowelyes").checked +
-					1.0863890*id("liveryes").checked;
+				   0.0120654*age +
+				  -0.0021012*bmi +
+				  -0.0031592*dose +
+				   0.0348383*id("female").checked +
+				  -0.1501354*(id("alcohol").value=="ex") +
+				  -0.0119396*(id("alcohol").value=="low") +
+				  -0.1516204*(id("alcohol").value=="medium") +
+				   0.2150670*(id("alcohol").value=="high") +
+				  -0.0919595*id("diabetesyes").checked +
+					0.4197865*id("kidneyyes").checked +
+				  -0.1177929*id("methoyes").checked +
+					0.0629356*id("statinyes").checked +
+					0.9939658*id("bloodyes").checked +
+					0.1014151*id("aminoyes").checked +
+				  -0.3581131*id("sulfyes").checked +
+				  -0.0473062*id("alloyes").checked +
+				   0.0440477*id("aceyes").checked +
+					0.7810266*id("sysyes").checked +
+					0.4467324*id("artyes").checked +
+					0.2838247*id("reactiveyes").checked +
+				  -0.0161052*id("smoker").checked;
 					
 				id("wt").disabled = true;
 				id("ht").disabled = true;
 				id("alcohol").disabled = true;
 				id("name").disabled = true;
-				id("dose").disabled = true;
             id("age").disabled = true;
             id("year").disabled = true;
             id("month").disabled = true;
             id("day").disabled = true;
 				id("height").disabled = true;
 				id("weight").disabled = true;
+				id("azadose").disabled = true;
+				id("merdose").disabled = true;
 				id("male").disabled = true;
 				id("female").disabled = true;
-				id("smoker").disabled = true;
-				id("nonsmoker").disabled = true;
 				id("artyes").disabled = true;
 				id("artno").disabled = true;
-				id("psoyes").disabled = true;
-				id("psono").disabled = true;
-				id("polyyes").disabled = true;
-				id("polyno").disabled = true;
-				id("tissueyes").disabled = true;
-				id("tissueno").disabled = true;
 				id("statinyes").disabled = true;
 				id("statinno").disabled = true;
-				id("aspirinyes").disabled = true;
-				id("aspirinno").disabled = true;
-				id("parayes").disabled = true;
-				id("parano").disabled = true;
-				id("liveryes").disabled = true;
-				id("liverno").disabled = true;
-				id("bowelyes").disabled = true;
-				id("bowelno").disabled = true;
 				id("diabetesyes").disabled = true;
 				id("diabetesno").disabled = true;
 				id("kidneyyes").disabled = true;
 				id("kidneyno").disabled = true;
-				id("hydroyes").disabled = true;
-				id("hydrono").disabled = true;
+				id("nonsmoker").disabled = true;
+				id("smoker").disabled = true;
+				id("bloodyes").disabled = true;
+				id("bloodno").disabled = true;
+				id("aminoyes").disabled = true;
+				id("aminono").disabled = true;
+				id("alloyes").disabled = true;
+				id("allono").disabled = true;
 				id("sulfyes").disabled = true;
 				id("sulfno").disabled = true;
-				id("steroidyes").disabled = true;
-				id("steroidno").disabled = true;
-				id("protonyes").disabled = true;
-				id("protonno").disabled = true;
-				id("antiyes").disabled = true;
-				id("antino").disabled = true;
+				id("aceyes").disabled = true;
+				id("aceno").disabled = true;
+				id("sysyes").disabled = true;
+				id("sysno").disabled = true;
+				id("methono").disabled = true;
+				id("methoyes").disabled = true;
+				id("reactiveno").disabled = true;
+				id("reactiveyes").disabled = true;
+				id("bowelno").disabled = true;
+				id("bowelyes").disabled = true;
 				
 				id("result").style = "display:block";
 				id("date").innerText = "Date: " + new Date().toLocaleDateString();
 				id("bmi").innerText = "BMI: " + bmi.toFixed(1);
-				id("risk").innerText = "Risk: " + ((1-(0.895**Math.exp(0.93*result)))*100).toFixed(2)+"%";
+				id("risk").innerText = "Risk: " + ((1-(0.938**Math.exp(0.80*result)))*100).toFixed(2)+"%";
 				id("age").value = Math.floor(age);
 		  }
 		  
@@ -287,123 +277,105 @@
 				}
 		  }
 		  
+		  function hideAza()
+		  {
+				if(id("azadose").value)
+				{
+					id("merdose").value="";
+					id("merdose").disabled = true;
+				}
+				else
+					id("merdose").disabled = false;
+		  }
+		  
+		  function hideMer()
+		  {
+				if(id("merdose").value)
+				{
+					id("azadose").value="";
+					id("azadose").disabled = true;
+				}
+				else
+					id("azadose").disabled = false;
+		  }
+		  
+		  function hideSys()
+		  {
+				if(id("sysyes").checked)
+				{
+					id("reactiveno").disabled = true;
+					id("reactiveyes").disabled = true;
+					id("artno").disabled = true;
+					id("artyes").disabled = true;
+					id("bowelno").disabled = true;
+					id("bowelyes").disabled = true;
+					
+					id("reactiveno").checked = false;
+					id("reactiveyes").checked = false;
+					id("artno").checked = false;
+					id("artyes").checked = false;
+					id("bowelno").checked = false;
+					id("bowelyes").checked = false;
+				}
+				else
+				{
+					id("reactiveno").disabled = false;
+					id("reactiveyes").disabled = false;
+					id("artno").disabled = false;
+					id("artyes").disabled = false;
+					id("bowelno").disabled = false;
+					id("bowelyes").disabled = false;
+					
+					id("reactiveno").checked = true;
+					id("artno").checked = true;
+					id("bowelno").checked = true;
+				}
+			}
+				
 		  function hideArt()
 		  {
 				if(id("artyes").checked)
 				{
-					id("tissueno").disabled = true;
-					id("tissueyes").disabled = true;
+					id("reactiveno").disabled = true;
+					id("reactiveyes").disabled = true;
 					id("bowelno").disabled = true;
 					id("bowelyes").disabled = true;
-					id("psono").disabled = true;
-					id("psoyes").disabled = true;
-					id("polyno").disabled = true;
-					id("polyyes").disabled = true;
 					
-					id("tissueno").checked = false;
-					id("tissueyes").checked = false;
+					id("reactiveno").checked = false;
+					id("reactiveyes").checked = false;
 					id("bowelno").checked = false;
 					id("bowelyes").checked = false;
-					id("psono").checked = false;
-					id("psoyes").checked = false;
-					id("polyno").checked = false;
-					id("polyyes").checked = false;
 				}
 				else
 				{
-					id("tissueno").disabled = false;
-					id("tissueyes").disabled = false;
+					id("reactiveno").disabled = false;
+					id("reactiveyes").disabled = false;
 					id("bowelno").disabled = false;
 					id("bowelyes").disabled = false;
-					id("psono").disabled = false;
-					id("psoyes").disabled = false;
-					id("polyno").disabled = false;
-					id("polyyes").disabled = false;
 					
-					id("tissueno").checked = true;
+					id("reactiveno").checked = true;
 					id("bowelno").checked = true;
-					id("psono").checked = true;
-					id("polyno").checked = true;
 				}
 			}
-				
-		  function hideTissue()
+			
+			function hideReactive()
 		  {
-				if(id("tissueyes").checked)
+				if(id("reactiveyes").checked)
 				{
 					id("bowelno").disabled = true;
 					id("bowelyes").disabled = true;
-					id("psono").disabled = true;
-					id("psoyes").disabled = true;
-					id("polyno").disabled = true;
-					id("polyyes").disabled = true;
 					
 					id("bowelno").checked = false;
 					id("bowelyes").checked = false;
-					id("psono").checked = false;
-					id("psoyes").checked = false;
-					id("polyno").checked = false;
-					id("polyyes").checked = false;
 				}
 				else
 				{
 					id("bowelno").disabled = false;
 					id("bowelyes").disabled = false;
-					id("psono").disabled = false;
-					id("psoyes").disabled = false;
-					id("polyno").disabled = false;
-					id("polyyes").disabled = false;
 					
 					id("bowelno").checked = true;
-					id("psono").checked = true;
-					id("polyno").checked = true;
 				}
 			}
-				
-		  function hideBowel()
-		  {
-				if(id("bowelyes").checked)
-				{
-					id("psono").disabled = true;
-					id("psoyes").disabled = true;
-					id("polyno").disabled = true;
-					id("polyyes").disabled = true;
-					
-					id("psono").checked = false;
-					id("psoyes").checked = false;
-					id("polyno").checked = false;
-					id("polyyes").checked = false;
-				}
-				else
-				{
-					id("psono").disabled = false;
-					id("psoyes").disabled = false;
-					id("polyno").disabled = false;
-					id("polyyes").disabled = false;
-					
-					id("psono").checked = true;
-					id("polyno").checked = true;
-				}
-		  }
-		  
-		  function hidePso()
-		  {
-				if(id("psoyes").checked)
-				{
-					id("polyno").disabled = true;
-					id("polyyes").disabled = true;
-					
-					id("polyno").checked = false;
-					id("polyyes").checked = false;
-				}
-				else
-				{
-					id("polyno").disabled = false;
-					id("polyyes").disabled = false;
-					
-					id("polyno").checked = true;
-				}
-		  }
 		  
     </script>
 
@@ -439,10 +411,10 @@
 		 <ul>
 			  <li class="wide"><a href="" class="droplink" onclick="return false">Calculation Tools</a>
 					<ul id="calc_countries">
-						 <li><a href="" class="sublink" onclick="return false">Methotrexate</a></li>
+						 <li><a href="../methotrexate/index.html" class="sublink">Methotrexate</a></li>
 						 <li><a href="../sulfasalazine/index.html" class="sublink">Sulfasalazine</a></li>
-						 <li><a href="../thiopurine/index.html" class="sublink">Thiopurine</a></li>
-						 <li><a href="../leflunomide/index.html" class="sublink">Leflunomide</a></li>
+						 <li><a href="" class="sublink" onclick="return false">Thiopurine</a></li>
+						 <li><a href="../leflunomide/index.html" class="sublink" >Leflunomide</a></li>
 					</ul>
 			  </li>
 		 </ul>
@@ -456,7 +428,7 @@
             <span id="timer"></span>
             <div id="rightdiv_tool">
 				
-                <div style="border: 1px solid #ccc; background: #FFF; padding: 20px; margin-top: 71px; margin-bottom:243px">
+                <div style="border: 1px solid #ccc; background: #FFF; padding: 20px; margin-top: 71px; margin-bottom:168px">
                     <h2>Weight Conversion</h2>
                     <p><b>Pounds</b> <img src="calc_arrow.png" style="margin: 0 10px 0 10px;" alt=""> <b>kg</b></p>
 
@@ -542,19 +514,10 @@
                             <div class="radio"><input value="female" name="sex" type="radio" id="female"><label for="female">Female</label></div>
                         </div>
                     </div>
-						  <div class="input-wrap">
-                        <div class="title">
-                            <div class="question-number">3.</div>
-                            <div class="question-text">Weekly methotrexate dose (mg)</div>
-                        </div>
-                        <div class="input">
-                            <input name="dose" type="number" min="2.5" max="25" step="0.5" id="dose" maxlength="3" size="5">
-                        </div>
-                    </div>
                     <!-- Weight -->
                     <div class="input-wrap">
                         <div class="title">
-                            <div class="question-number">4.</div>
+                            <div class="question-number">3.</div>
                             <div class="question-text">Weight (kg)</div>
                         </div>
                         <div class="input">
@@ -564,16 +527,34 @@
                     <!-- Height -->
                     <div class="input-wrap">
                         <div class="title">
-                            <div class="question-number">5.</div>
+                            <div class="question-number">4.</div>
                             <div class="question-text">Height (cm)</div>
                         </div>
                         <div class="input">
                             <input name="height" type="number" id="height" maxlength="5" size="7" min="90" max="240">
                         </div>
                     </div>
-                    <div class="input-wrap">
+						  <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">5.</div>
+                            <div class="question-text">Daily Azathioprine dose (mg)</div>
+                        </div>
+                        <div class="input">
+                            <input name="azadose" type="number" min="0.0" max="1000" step="0.5" id="azadose" maxlength="3" size="5" onchange="hideAza()">
+                        </div>
+                    </div>
+						  <div class="input-wrap">
                         <div class="title">
                             <div class="question-number">6.</div>
+                            <div class="question-text">Daily Mercaptopurine dose (mg)</div>
+                        </div>
+                        <div class="input">
+                            <input name="merdose" type="number" min="0.0" max="1000" step="0.5" id="merdose" maxlength="3" size="5" onchange="hideMer()">
+                        </div>
+                    </div>
+						  <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">7.</div>
                             <div class="question-text">Current Smoker</div>
                         </div>
                         <div class="input">
@@ -583,72 +564,42 @@
                     </div>
 						  <div class="input-wrap">
                         <div class="title">
-                            <div class="question-number">7.</div>
-                            <div class="question-text">Rheumatoid arthritis</div>
-                        </div>
-                        <div class="input">
-                            <div class="radio"><input name="arthritis" type="radio" id="artno" onclick="hideArt()" checked><label for="artno">No</label></div>
-                            <div class="radio"><input name="arthritis" type="radio" id="artyes" onclick="hideArt()"><label for="artyes">Yes</label></div>
-                        </div>
-                    </div>
-						  <div class="input-wrap">
-                        <div class="title">
                             <div class="question-number">8.</div>
-                            <div class="question-text">Connective tissue disease</div>
+                            <div class="question-text">Systematic Lupus Erythematosus</div>
                         </div>
                         <div class="input">
-                            <div class="radio"><input name="tissue" type="radio" id="tissueno" onclick="hideTissue()" checked><label for="tissueno">No</label></div>
-                            <div class="radio"><input name="tissue" type="radio" id="tissueyes" onclick="hideTissue()"><label for="tissueyes">Yes</label></div>
+                            <div class="radio"><input name="sys" type="radio" id="sysno" onclick="hideSys()" checked><label for="sysno">No</label></div>
+                            <div class="radio"><input name="sys" type="radio" id="sysyes" onclick="hideSys()"><label for="sysyes">Yes</label></div>
                         </div>
                     </div>
 						  <div class="input-wrap">
                         <div class="title">
                             <div class="question-number">9.</div>
-                            <div class="question-text">Inflammatory Bowel Disease or Ankylosing spondylitis or Reactice arthritis</div>
+                            <div class="question-text">Rheumatoid arthritis</div>
                         </div>
                         <div class="input">
-                            <div class="radio"><input name="bowel" type="radio" id="bowelno" onclick="hideBowel()" checked><label for="bowelno">No</label></div>
-                            <div class="radio"><input name="bowel" type="radio" id="bowelyes" onclick="hideBowel()"><label for="bowelyes">Yes</label></div>
+                            <div class="radio"><input name="art" type="radio" id="artno" onclick="hideArt()" checked><label for="artno">No</label></div>
+                            <div class="radio"><input name="art" type="radio" id="artyes" onclick="hideArt()"><label for="artyes">Yes</label></div>
                         </div>
                     </div>
 						  <div class="input-wrap">
                         <div class="title">
                             <div class="question-number">10.</div>
-                            <div class="question-text">Psoriasis or Psoriatic arthritis</div>
+                            <div class="question-text">Reactive arthritis</div>
                         </div>
                         <div class="input">
-                            <div class="radio"><input name="psoriasis" type="radio" id="psono" onclick="hidePso()" checked><label for="psono">No</label></div>
-                            <div class="radio"><input name="psoriasis" type="radio" id="psoyes" onclick="hidePso()"><label for="psoyes">Yes</label></div>
+                            <div class="radio"><input name="reactive" type="radio" id="reactiveno" onclick="hideReactive()" checked><label for="reactiveno">No</label></div>
+                            <div class="radio"><input name="reactive" type="radio" id="reactiveyes" onclick="hideReactive()"><label for="reactiveyes">Yes</label></div>
                         </div>
                     </div>
-                    <div class="input-wrap">
+						  <div class="input-wrap">
                         <div class="title">
                             <div class="question-number">11.</div>
-                            <div class="question-text">Polymyalgia rheumatica or giant cell arteritis</div>
+                            <div class="question-text">Inflammatory Bowel Disease</div>
                         </div>
                         <div class="input">
-                            <div class="radio"><input name="poly" type="radio" id="polyno" checked><label for="polyno">No</label></div>
-                            <div class="radio"><input name="poly" type="radio" id="polyyes"><label for="polyyes">Yes</label></div>
-                        </div>
-                    </div>
-						  <div class="input-wrap">
-                        <div class="title">
-                            <div class="question-number">12.</div>
-                            <div class="question-text">Statins</div>
-                        </div>
-                        <div class="input">
-                            <div class="radio"><input name="statin" type="radio" id="statinno" checked><label for="statinno">No</label></div>
-                            <div class="radio"><input name="statin" type="radio" id="statinyes"><label for="statinyes">Yes</label></div>
-                        </div>
-                    </div>
-						  <div class="input-wrap">
-                        <div class="title">
-                            <div class="question-number">13.</div>
-                            <div class="question-text">NSAIDs or high dose aspirin</div>
-                        </div>
-                        <div class="input">
-                            <div class="radio"><input name="aspirin" type="radio" id="aspirinno" checked><label for="aspirinno">No</label></div>
-                            <div class="radio"><input name="aspirin" type="radio" id="aspirinyes"><label for="aspirinyes">Yes</label></div>
+                            <div class="radio"><input name="bowel" type="radio" id="bowelno" checked><label for="bowelno">No</label></div>
+                            <div class="radio"><input name="bowel" type="radio" id="bowelyes"><label for="bowelyes">Yes</label></div>
                         </div>
                     </div>
                 </div> 
@@ -656,29 +607,9 @@
                 <!--            RIGHT CONTENT             -->
                 <!------------------------------------------>
                 <div class="tool-content-right">
-						  <div class="input-wrap">
+					     <div class="input-wrap">
                         <div class="title">
-                            <div class="question-number">14.</div>
-                            <div class="question-text">Paracetamol</div>
-                        </div>
-                        <div class="input">
-                            <div class="radio"><input name="para" type="radio" id="parano" checked><label for="parano">No</label></div>
-                            <div class="radio"><input name="para" type="radio" id="parayes"><label for="parayes">Yes</label></div>
-                        </div>
-                    </div>
-						  <div class="input-wrap">
-                        <div class="title">
-                            <div class="question-number">15.</div>
-                            <div class="question-text">Previous abnormal blood tests</div>
-                        </div>
-                        <div class="input">
-                            <div class="radio"><input name="liver" type="radio" id="liverno" checked><label for="liverno">No</label></div>
-                            <div class="radio"><input name="liver" type="radio" id="liveryes"><label for="liveryes">Yes</label></div>
-                        </div>
-                    </div>
-						  <div class="input-wrap">
-                        <div class="title">
-                            <div class="question-number">16.</div>
+                            <div class="question-number">12.</div>
                             <div class="question-text">Diabetes mellitus</div>
                         </div>
                         <div class="input">
@@ -688,7 +619,7 @@
                     </div>
 						  <div class="input-wrap">
                         <div class="title">
-                            <div class="question-number">17.</div>
+                            <div class="question-number">13.</div>
                             <div class="question-text">Chronic kidney disease stage 3</div>
                         </div>
                         <div class="input">
@@ -698,18 +629,38 @@
                     </div>
 						  <div class="input-wrap">
                         <div class="title">
-                            <div class="question-number">18.</div>
-                            <div class="question-text">Hydroxychloroquine</div>
+                            <div class="question-number">14.</div>
+                            <div class="question-text">Statins</div>
                         </div>
                         <div class="input">
-                            <div class="radio"><input name="hydro" type="radio" id="hydrono" checked><label for="hydrono">No</label></div>
-                            <div class="radio"><input name="hydro" type="radio" id="hydroyes"><label for="hydroyes">Yes</label></div>
+                            <div class="radio"><input name="statin" type="radio" id="statinno" checked><label for="statinno">No</label></div>
+                            <div class="radio"><input name="statin" type="radio" id="statinyes"><label for="statinyes">Yes</label></div>
                         </div>
                     </div>
 						  <div class="input-wrap">
                         <div class="title">
-                            <div class="question-number">19.</div>
-                            <div class="question-text">Sulfasalazine or 5-Aminosalicylates</div>
+                            <div class="question-number">15.</div>
+                            <div class="question-text">Methotrexate</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="metho" type="radio" id="methono" checked><label for="methono">No</label></div>
+                            <div class="radio"><input name="metho" type="radio" id="methoyes"><label for="methoyes">Yes</label></div>
+                        </div>
+                    </div>
+						  <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">16.</div>
+                            <div class="question-text">Aminosalicylates</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="amino" type="radio" id="aminono" checked><label for="aminono">No</label></div>
+                            <div class="radio"><input name="amino" type="radio" id="aminoyes"><label for="aminoyes">Yes</label></div>
+                        </div>
+                    </div>
+						  <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">17.</div>
+                            <div class="question-text">Sulfasalzine</div>
                         </div>
                         <div class="input">
                             <div class="radio"><input name="sulf" type="radio" id="sulfno" checked><label for="sulfno">No</label></div>
@@ -718,37 +669,37 @@
                     </div>
 						  <div class="input-wrap">
                         <div class="title">
+                            <div class="question-number">18.</div>
+                            <div class="question-text">Allopurinol</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="allo" type="radio" id="allono" checked><label for="allono">No</label></div>
+                            <div class="radio"><input name="allo" type="radio" id="alloyes"><label for="alloyes">Yes</label></div>
+                        </div>
+                    </div>
+						  <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">19.</div>
+                            <div class="question-text">ACE inhibitors</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="ace" type="radio" id="aceno" checked><label for="aceno">No</label></div>
+                            <div class="radio"><input name="ace" type="radio" id="aceyes"><label for="aceyes">Yes</label></div>
+                        </div>
+                    </div>
+						  <div class="input-wrap">
+                        <div class="title">
                             <div class="question-number">20.</div>
-                            <div class="question-text">Leflunomide or Thiopurine or Ciclosporin or Tacrolimus or Mycophenolate Mofetil</div>
+                            <div class="question-text">Previous Abnormal Blood Tests</div>
                         </div>
                         <div class="input">
-                            <div class="radio"><input name="steroid" type="radio" id="steroidno" checked><label for="steroidno">No</label></div>
-                            <div class="radio"><input name="steroid" type="radio" id="steroidyes"><label for="steroidyes">Yes</label></div>
-                        </div>
-                    </div>
-						  <div class="input-wrap">
-                        <div class="title">
-                            <div class="question-number">21.</div>
-                            <div class="question-text">Proton pump inhibitors  </div>
-                        </div>
-                        <div class="input">
-                            <div class="radio"><input name="proton" type="radio" id="protonno" checked><label for="protonno">No</label></div>
-                            <div class="radio"><input name="proton" type="radio" id="protonyes"><label for="protonyes">Yes</label></div>
-                        </div>
-                    </div>
-						  <div class="input-wrap">
-                        <div class="title">
-                            <div class="question-number">22.</div>
-                            <div class="question-text">Carbamazepine or Sodium Valproate or Levetiracetam</div>
-                        </div>
-                        <div class="input">
-                            <div class="radio"><input name="anti" type="radio" id="antino" checked><label for="antino">No</label></div>
-                            <div class="radio"><input name="anti" type="radio" id="antiyes"><label for="antiyes">Yes</label></div>
+                            <div class="radio"><input name="blood" type="radio" id="bloodno" checked><label for="bloodno">No</label></div>
+                            <div class="radio"><input name="blood" type="radio" id="bloodyes"><label for="bloodyes">Yes</label></div>
                         </div>
                     </div>
                     <div class="input-wrap">
                         <div class="title">
-                            <div class="question-number">23.</div>
+                            <div class="question-number">21.</div>
                             <div class="question-text">Alcohol Use</div>
                         </div>
 								 <div class="input">
@@ -827,36 +778,24 @@
                     <td>More than 21 units per week.</td>
                 </tr>
                 <tr>
-                    <td>Current smoking</td>
-                    <td>Enter yes or no depending on whether the patient currently smokes tobacco (see also notes on risk factors).</td>
-                </tr>
-                <tr>
                     <td>Rheumatoid arthritis</td>
                     <td>Enter yes where the patient has a confirmed diagnosis of rheumatoid arthritis. Otherwise enter no (see also notes on risk factors).</td>
                 </tr>
-					 <tr>
-                    <td>Connective Tissue Disease</td>
-                    <td>include lupus, systemic sclerosis, myositis, small vessel vasculitis; </td>
-                </tr>
-					 <tr>
-						<td>Other seronegative spondyloarthritis</td>
-						<td>include ankyolosing spondylitis, reactive arthritis and inflammatory bowel disease</td>
-					 </tr>
 					 <tr>
 						<td>Chronic kidney disease</td>
 						<td>Patients with chronic kidney disease stage 4 or 5 were excluded and the model should not be applied to them</td>
 					 </tr>
 					 <tr>
-						<td>Other immune suppressing steroid-sparing agents</td>
-						<td>include leflunomide, azathioprine, cyclosporine, tacrolimus</td>
-					 </tr>
+                    <td>Current smoking</td>
+                    <td>Enter yes or no depending on whether the patient currently smokes tobacco (see also notes on risk factors).</td>
+                </tr>
 					 <tr>
-						<td>Anti-epileptic drugs</td>
-						<td>include carbamazepine, levetiracetam, and sodium valproate</td>
-					 </tr>
+                    <td>Current thiopurine dose</td>
+                    <td>For patients prescribed azathioprine, please enter the daily aza dose and the daily mercaptopurine equivalent dose will be automatically calculated For patients prescribed mercaptopurine, please enter the daily mercaptopurine dose. Please do not enter both daily azathioprine and mercaptopurine doses at the same time.</td>
+                </tr>
 					 <tr>
 						<td>Blood test abnormality in 6 months of primary care prescription</td>
-						<td>was defined as either cytopenia (neutrophil count &lt;2x10<sup>9</sup>/l, total leucocyte count &lt;4x10<sup>9</sup>/l, or platelet count &lt;150x10<sup>9</sup>/l) or elevated transaminase (ALT and/or AST &gt;35 IU/l) during the first 6 months of primary-care methotrexate prescription. If methotrexate is always prescribed from a hospital or specialist clinic, this parameter should be evaluated during first six month of methotrexate prescription at a stable dose</td>
+						<td>defined as neutrophil count &lt;2x10<sup>9</sup>/l or total leucocyte count &lt;4x10<sup>9</sup>/l, or platelet count &lt;150x10<sup>9</sup>/l or raised transaminase (ALT and/or AST &gt;35 IU/l)</td>
 					 </tr>
                 </tbody></table>
                 <a name="notes" id="notes"></a>

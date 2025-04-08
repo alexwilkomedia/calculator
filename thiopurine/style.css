@@ -1,0 +1,506 @@
+html,body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    color: #444;
+    font: 15px Arial, Helvetica, sans-serif;
+    text-align: center; /* FOR IE 5 */
+}
+body { background: #eee}
+
+.selectedLang {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+/********************************** WRAPS *************************************/
+
+#wrap {
+    width: 1000px;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+    text-align: left;
+}
+
+#container {
+    width: 998px; /* required by IE6 */
+    overflow: hidden; /* for floated divs */
+    border: 1px solid #ccc;
+    background: #fff;
+    border-top:0;
+    border-bottom:0;    
+}
+
+/******************************** CONTENT *************************************/
+
+#content, #content_home {
+    float: left;
+    margin: 0;
+    padding: 30px;
+    text-align: justify;
+    color: #444;
+}
+#content_home { width: 627px;}
+
+#content h1, #content_home  h1 {
+    margin:0 0 30px 0;
+    padding-bottom: 5px;
+    border-bottom: 3px solid #3092d1;
+    font-size: 26px;
+    color: #666;
+    width: 660px;
+}
+
+#content h2.large, #content_home  h2.large {
+    font-size: 26px;
+    color: #666;
+}
+
+#flash-problems {
+    overflow: hidden;
+    margin: 30px 0px 5px 0px;
+    border: 1px solid #CCC;
+    background: #EEE;
+    padding: 10px;
+    width: 915px; /* Added 03/01/13 */
+}
+
+/**************************** LEFT / RIGHT DIVS *******************************/
+
+#leftdiv {
+    float: left;
+    width: 140px;
+    min-height: 350px;
+    margin-right: 30px;
+    padding: 30px;
+    border-right: 1px solid #ccc;
+}
+
+#rightdiv, #rightdiv_tool {
+    float: right;
+    width: 250px;
+    min-height: 350px;
+    margin: 0;
+    padding: 30px;
+    border-left: 1px solid #ccc;
+    font-size: 12px;    
+}
+
+#rightdiv table#home_links {
+    border-spacing: 0px;
+    border-collapse: collapse;    
+}
+
+#rightdiv table#home_links img { padding: 5px 0 5px 30px;}
+
+#rightdiv h2 { margin-top: 0; }
+
+#rightdiv_tool {
+    margin-left: 30px; padding-right: 0; width: 200px; display: block;
+}
+
+/********************************* FOOTER *************************************/
+
+#footer {
+    width: 958px;
+    padding: 13px 20px 10px 20px;
+    border: 1px solid #ccc;
+    border-top: 3px solid #ccc;
+    font-size: 12px;
+    overflow: hidden;
+}
+
+#footer p.languages {
+    margin-top: 10px;
+    font-size: 10px;
+}
+#footer p.termsandconditions {
+    font-size: 10px;
+}
+
+#richlyn {
+    margin-top: 10px;
+    padding-bottom: 20px;
+    width: 978px;
+    text-align: right;
+    font-size: 12px;
+}
+#richlyn a { color: #888; }
+
+/********************************** LINKS *************************************/
+
+a { text-decoration: none; color: #253477; }
+a:hover { text-decoration: underline; color: #0daad7; }
+
+a img { border: 0; }
+
+a.chart_pdf { float: left; width: 290px; margin: 5px; padding: 6px 6px; color: #444; }
+a.chart_pdf:hover { background-position: 0 -30px; text-decoration: none; color: #F44; }
+
+div.pdf_link { display: none; }
+/********************************* HEADINGS ************************************/
+
+h1 { font-size: 18px; color: #666; }
+h2 { font-size: 16px; color: #666; }
+h3 { font-size: 14px; color: #888; }
+
+/******************************** PICTURES ************************************/
+
+img.picture { border: 3px solid #ccc; }
+
+/********************************* BANNER *************************************/
+
+#banner{
+    width: 998px;
+    height: 70px;
+    margin: 0 auto;
+    padding:0;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+#banner img#bone { position: absolute; top:0; left:1px; z-index: 101; /* above menu */ }
+
+#banner img#title { position: absolute; top:14px; left:180px; }
+
+#ref-title {
+    margin-left: 180px;
+    padding: 15px;
+    font-size: 30px;
+    color: #FFECB3;
+    text-shadow: 1px 1px 1px #444444; 
+    line-height: 22px;
+}
+
+#ref-title span.reg {
+    font-size: 16px;
+    position: absolute;
+    line-height: 0;
+}
+
+#ref-title span.ref-text {
+    font-size: 20px;
+    font-weight: normal;
+    margin-left: 30px;
+}
+
+/******************************** NAVIGATION **********************************/
+
+#menu {
+    width: 858px !important;
+    height: 28px;
+    text-align: left;
+    margin: 0;
+    font-weight: bold;
+    font-size: 12px;
+    border-bottom: 1px solid #999;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    z-index: 100;
+    padding-left: 140px;
+}
+
+#menu ul {
+    padding: 0px;
+    float: left;
+    margin: 0px;
+    list-style-type: none;
+}
+
+#menu a {
+    display: block;
+    margin: 0px;
+    text-decoration: none;
+    color: #444;
+    background: #c5c7c5;
+    height: 21px;
+    min-width: 80px;
+    padding: 7px 10px 0px 10px;
+    text-align: left;
+    border-right: 1px solid #ccc;
+}
+#menu a:hover, #menu a:active, #menu a:focus {
+    color: #fff;
+    background-color: #5fbaf3;
+    background-position: 0 -32px;
+    text-align: left;
+}
+
+#menu a.sublink {
+    background: #f7f2da;
+    width: 200px;
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+
+}
+#menu a.sublink:hover, #menu a.sublink:active, #menu a.sublink:focus {
+    color: #fff;
+    background: #f00;
+}
+
+#menu a.droplink {
+    width: 120px;
+    background: #c5c7c5;
+    border-right: 1px solid #ccc;
+}
+
+#menu a.droplink:hover, #menu a.droplink:active, #menu a.droplink:focus {
+    background-color: #5fbaf3;
+    background-position: 0 -32px;
+}
+
+#menu li { position: relative; padding: 0; margin: 0; }
+#menu ul li {
+    width: auto !important;
+    width: 120px;
+}
+#menu li.short {
+    width: auto !important;
+    width: 80px;
+}
+#menu li.short a { width: 70px; }
+
+#menu li.wide {
+    width: auto !important;
+    width: 180px;
+}
+
+#menu li.wide a { width: 160px; }
+#menu li.mid a { width: 95px; }
+#menu li.wide ul ul a { width: 270px; }
+#menu li.wide ul ul ul a { width: 150px; }
+
+#menu ul ul { position: absolute; z-index: 500; padding-top: 1px; border-bottom: 1px solid #ccc; }
+
+#menu ul ul ul { position: absolute; left: 100%; top: 0px;}
+#menu ul ul ul.country-menu { position: absolute; left: 100%; top: 0px; width: 517px;}
+
+div#menu ul ul,
+div#menu ul li:hover ul ul,
+div#menu ul ul li:hover ul ul { display: none; }
+
+div#menu ul li:hover ul,
+div#menu ul ul li:hover ul,
+div#menu ul ul ul li:hover ul { display: block; background: none; }
+
+ul.country-menu li, ul.country-menu li a {float: left !important; width: 150px !important;}
+
+#language {
+   position: absolute;
+   top: 73px;
+   right: 3px;
+   z-index: 101; /* sit above menu */
+}
+#language select {
+    width: 150px;
+    padding: 2px;
+}
+
+/****************************** INPUTS AND FORMS ******************************/
+
+input[type="text"], input[type="number"], textarea, select {
+    color: #666;
+    border: 1px solid #bbb;
+    padding: 3px 5px;
+    margin: 0;
+}
+
+/*********************************** TABLES ***********************************/
+
+table.charts { border-spacing: 0px; border-collapse: collapse; }
+table.charts td { padding: 10px 10px; border: 1px solid #888; text-align: center; }
+
+table.tool { border-spacing: 0px; border-collapse: collapse; margin-bottom: 20px; }
+table.tool td { padding: 10px 10px; border: 1px solid #888; text-align: left; }
+
+table.convert { border-spacing: 0px; border-collapse: collapse; width: 100%; }
+
+#nos_logo_table { width: 200px; }
+
+#nos_logo_table td { text-align: center; padding: 5px; }
+
+#simg_logo_table { width: 200px; }
+
+#simg_logo_table td { text-align: center; padding: 5px; }
+
+#smos_logo_table { width: 200px; }
+
+#smos_logo_table td { text-align: center; padding: 5px; }
+
+/*********************************** TOOL ***********************************/
+/*
+    Added 03/01/13 
+*/
+#tool-wrap {
+    width: 660px;
+    border: 1px solid #CCC;  
+    overflow: hidden;  
+    font-size: 12px;
+    font-family: tahoma;
+    background: #FFF;
+    text-align: left;
+}
+        
+/* ---------- Tool Header -----------*/
+.tool-header {  
+    overflow: hidden;
+    border-bottom: 1px solid #CCC;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    _height: 37px; /* IE 6 */
+}
+.tool-header .country { float: left; width: 200px; padding: 5px 0; }
+.tool-header .country span { color: #CC0000; padding-left: 5px; }
+.tool-header .name { float: left; }
+.tool-header .info { float: right; padding: 5px 0; }
+.tool-header .info a { color: #0C23FA; text-decoration: none; } 
+.tool-header .info a:hover { text-decoration: underline; }
+        
+/* ---------- Tool Content -----------*/
+.tool-content-left, .tool-content-right {
+    padding: 10px 10px;
+    overflow: hidden;
+}
+
+.tool-content-left { float: left; padding-left: 10px; }
+.tool-content-right { float: right; padding-right: 10px; }
+
+.tool-title { font-size: 25px; font-weight: normal; color: #CC0000; padding-bottom: 15px; line-height: 10px; }
+.input-wrap {
+    width: 310px;
+    display: block;
+    padding-bottom: 10px;
+    overflow: hidden;
+}
+
+
+
+.input-wrap .title { float: left; width: 195px;  }
+.input-wrap .title.short { width: auto; }
+.input-wrap .title.full { display: block; width: 100%; padding-bottom: 5px; }
+
+.question-text { float: left; max-width: 172px; padding-left: 5px; text-align: left;}
+.question-text.long { max-width: 287px; }
+.question-number { float: left;}
+.input-wrap .input { float: right; padding-right: 5px; }
+.input-wrap .input.age-wrap { float: left; padding-left: 15px; }
+.input-wrap .input .radio { float: left; padding: 0 4px; }
+.input-wrap .input .dob { float: left; padding: 0 3px; margin-left: 5px;  }
+.input-wrap .input .custom-label { padding-bottom: 5px; }
+.input-wrap .input input[type="text"] {
+    padding: 3px;
+    margin: 1px 0;
+}
+
+input[type="number"] 
+{
+   width: 50px;
+}
+
+.t-score { float: left; font-size: 14px; padding: 2px 5px; }
+/* ----------- Result -------------*/
+.result-outter {
+    width: 295px;
+    position: relative;   
+    overflow: hidden; 
+    margin-top: 10px;
+    float: left;
+}
+.result-wrap {
+    padding: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+    float: left;
+    display: block;
+    width: 270px;
+    position: relative; 
+}
+        
+.result-header {
+    color: #FFED00;
+    font-size: 12px;
+    display: block;
+    position: relative;
+}     
+.result-header .bmi { font-size: 14px; padding-bottom: 3px; }
+.result-header p { padding: 0; margin: 0; font-size: 11px; }
+        
+.result-content { padding: 5px 0; overflow: hidden; }    
+.result-content p { font-weight: bold; margin: 5px 0; font-size: 12px; color: #000; }
+.result-box { margin-bottom: 5px; overflow: hidden; width: 100%; }
+.result-text { padding: 5px; background-color: #FFF; position: relative;}
+.result-score { float: right; padding: 5px; background-color: #FFF; text-align: center; color: #FF0000; font-weight: bold; position: relative;}
+.view-nogg { border: 1px solid #FFF; background: #F8F8F8; padding: 5px; float: left; color: #990000; text-decoration: none; position: relative;}
+
+.view-nogg-wrapper {
+    position: relative;
+    overflow: hidden; 
+    float: left;
+    width: auto;   
+}
+.view-nogg:hover { border: 1px solid #000; text-decoration: none; }
+.print { background: url(../images/printer.png) no-repeat; width: 31px; height: 31px; float: right; position: absolute; top: 0; right: 0; _right: 10px; cursor: pointer; }
+
+.result-text-wrap {
+    position: relative;
+    overflow: hidden;
+    width: 230px; 
+    float: left;
+    margin-right: 5px;
+}
+
+.result-text-wrap.small {
+    width: 30px;
+    margin-right: 0;
+}
+
+.tool_notification {
+    background-color: rgb(235, 235, 235);
+    border: 1px solid rgb(191, 191, 191);
+    margin-top: 10px;
+    padding: 10px;
+    overflow: hidden;
+    height: 100%;
+    text-align: center;
+    display: block;
+    width: 640px;
+    font-weight: bold;
+}
+
+.tbsText {
+    clear:both;
+    float:left;
+    margin-top:8px;
+    font-size:12px;
+    width: 191px;
+
+} 
+
+.tbsButton {
+    float:right;
+    color: #000;  
+	background: #E6E6E6;
+	border: 1px solid;
+	font-size: 12px !important; 
+	text-decoration: none !important;
+	padding: 4px 6px;
+	margin-top:5px;
+    margin-right: 15px;
+    width:85px;
+    
+}
+
+#cemarkTable, #cemarkTable th, #cemarkTable td {
+    border: 1px solid grey;
+}
+
+#cemarkTable th, #cemarkTable td {
+    padding: 5px;
+}
+
+.date
+{
+	float: right;
+	padding: 4px;
+}
