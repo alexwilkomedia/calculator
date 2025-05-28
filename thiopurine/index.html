@@ -125,7 +125,7 @@
 				
 				var bmi = id("weight").value/id("height").value**2*10000;
 				
-				var dose = id("azadose").value?id("azadose").value/2.08:0 + id("merdose").value?id("merdose").value/1.00:0;
+				var dose = id("azadose").value?id("azadose").value/2.08:0 + id("merdose").value?id("merdose").value:0;
 				
 				if(!id("name").value || !id("weight").value || !id("height").value)
 				{
@@ -179,17 +179,23 @@
 					return;
 				}
 				
+				if(id("azadose").value && (id("azadose").value<25 || id("azadose").value>400))
+				{
+					alert("The daily azathioprine dose must be at least 25mg and must not exceed 400mg");
+					return;
+				}
+				
+				if(id("merdose").value && (id("merdose").value<10 || id("merdose").value>200))
+				{
+					alert("The daily thiopurine dose must be at least 10mg and must not exceed 200mg");
+					return;
+				}
+				
 				if(!id("male").checked && !id("female").checked)
 				{
 					alert("Please select the biological sex of the patient");
 					return;
 				}
-				
-				/*if(7*dose<2.5 || 7*dose>25)
-				{
-					alert("The weekly dose must be at least 2.5mg and must not exceed 25mg");
-					return
-				}*/
 			
 				var result =
 				   0.0120654*age +
@@ -406,15 +412,15 @@
   
 		<div id="menu">
 		 <ul>
-			  <li class="short"><a href="..">Home</a></li>
+			  <li class="short"><a href="../index.html">Home</a></li>
 		 </ul>
 		 <ul>
 			  <li class="wide"><a href="" class="droplink" onclick="return false">Calculation Tools</a>
 					<ul id="calc_countries">
-						 <li><a href="../methotrexate" class="sublink">Methotrexate</a></li>
-						 <li><a href="../sulfasalazine" class="sublink">Sulfasalazine</a></li>
+						 <li><a href="../methotrexate/index.html" class="sublink">Methotrexate</a></li>
+						 <li><a href="../sulfasalazine/index.html" class="sublink">Sulfasalazine</a></li>
 						 <li><a href="" class="sublink" onclick="return false">Thiopurine</a></li>
-						 <li><a href="../leflunomide" class="sublink" >Leflunomide</a></li>
+						 <li><a href="../leflunomide/index.html" class="sublink" >Leflunomide</a></li>
 					</ul>
 			  </li>
 		 </ul>
@@ -428,7 +434,7 @@
             <span id="timer"></span>
             <div id="rightdiv_tool">
 				
-                <div style="border: 1px solid #ccc; background: #FFF; padding: 20px; margin-top: 71px; margin-bottom:168px">
+                <div style="border: 1px solid #ccc; background: #FFF; padding: 20px; margin-top: 71px; margin-bottom:260px">
                     <h2>Weight Conversion</h2>
                     <p><b>Pounds</b> <img src="calc_arrow.png" style="margin: 0 10px 0 10px;" alt=""> <b>kg</b></p>
 
@@ -455,8 +461,10 @@
             <div>
                 <h1>Calculation Tool</h1>
             </div>
+				
+				<p>This calculator is for educational purposes and for user feedback. <span style="color:red">It should not be used for patient care</span>. Contact  mavric@nottingham.ac.uk for any feedback. The mailbox is monitored intermittently. Do not send personal details.</p>
 
-            <p>Please answer the questions below to calculate the risk.</p>                        
+            <p>Please answer the questions below to calculate the risk of stopping thiopurines due to blood-test abnormalities in the next 5 years.</p>                        
 
             <div id="ctl00_ContentPlaceHolder1_updCongrats">
 	                        
@@ -540,7 +548,7 @@
                             <div class="question-text">Daily Azathioprine dose (mg)</div>
                         </div>
                         <div class="input">
-                            <input name="azadose" type="number" min="0.0" max="1000" step="0.5" id="azadose" maxlength="3" size="5" onchange="hideAza()">
+                            <input name="azadose" type="number" min="25" max="400" step="0.5" id="azadose" maxlength="3" size="5" onchange="hideAza()">
                         </div>
                     </div>
 						  <div class="input-wrap">
@@ -549,7 +557,7 @@
                             <div class="question-text">Daily Mercaptopurine dose (mg)</div>
                         </div>
                         <div class="input">
-                            <input name="merdose" type="number" min="0.0" max="1000" step="0.5" id="merdose" maxlength="3" size="5" onchange="hideMer()">
+                            <input name="merdose" type="number" min="10" max="200" step="0.5" id="merdose" maxlength="3" size="5" onchange="hideMer()">
                         </div>
                     </div>
 						  <div class="input-wrap">
@@ -585,7 +593,7 @@
 						  <div class="input-wrap">
                         <div class="title">
                             <div class="question-number">10.</div>
-                            <div class="question-text">Reactive arthritis</div>
+                            <div class="question-text">Psoriasis or ankylosing spondylitis or Reactive arthritis</div>
                         </div>
                         <div class="input">
                             <div class="radio"><input name="reactive" type="radio" id="reactiveno" onclick="hideReactive()" checked><label for="reactiveno">No</label></div>
@@ -640,7 +648,7 @@
 						  <div class="input-wrap">
                         <div class="title">
                             <div class="question-number">15.</div>
-                            <div class="question-text">Methotrexate</div>
+                            <div class="question-text">Methotrexate or Leflunomide</div>
                         </div>
                         <div class="input">
                             <div class="radio"><input name="metho" type="radio" id="methono" checked><label for="methono">No</label></div>
@@ -743,8 +751,11 @@
             <!-- End Tool -->
             <p class="noPrint" style="text-align:right;margin-bottom:0;width:660px;"><a href="" onclick="window.print(); return false;" style="vertical-align:top;line-height:31px;color:#0C23FA;"><img src="printer.png" style="padding-right:5px;vertical-align:middle;">Print tool and information</a></p>
             <div id="noPrint">
-                <h2 class="large">Risk factors</h2>
-                <p>For the clinical risk factors a yes or no response is asked for. If the field is left blank, then a "no" response is assumed.<br><br>The risk factors used are the following:</p>
+                <h2 class="large">Footnotes</h2>
+                <p>
+						For the clinical risk factors a yes or no response is asked for. If the field is left blank, then a "no" response is assumed.<br>
+						For Questions 6 to 11, if multiple conditions are diagnosed, please select only the one listed first.
+					 </p>
 
                 <br>
 
@@ -779,15 +790,27 @@
                 </tr>
                 <tr>
                     <td>Rheumatoid arthritis</td>
-                    <td>Enter yes where the patient has a confirmed diagnosis of rheumatoid arthritis. Otherwise enter no (see also notes on risk factors).</td>
+                    <td>Enter yes where the patient has a confirmed diagnosis of rheumatoid arthritis. Otherwise enter no.</td>
                 </tr>
 					 <tr>
-						<td>Chronic kidney disease</td>
+                    <td>Systemic Lupus Erythematosus</td>
+                    <td>Enter yes where the patient has a confirmed diagnosis of systemic lupus erythematosus. Otherwise enter no.</td>
+                </tr>
+					 <tr>
+                    <td>Inflammatory Bowel Disease</td>
+                    <td>Enter yes where the patient has a confirmed diagnosis of Inflammatory Bowel Disease. Otherwise enter no.</td>
+                </tr>
+					 <tr>
+						<td>Chronic kidney disease stage 3</td>
 						<td>Patients with chronic kidney disease stage 4 or 5 were excluded and the model should not be applied to them</td>
 					 </tr>
 					 <tr>
+						<td>Drugs</td>
+						<td>If currently prescribed.</td>
+					 </tr>
+					 <tr>
                     <td>Current smoking</td>
-                    <td>Enter yes or no depending on whether the patient currently smokes tobacco (see also notes on risk factors).</td>
+                    <td>Enter yes or no depending on whether the patient currently smokes tobacco.</td>
                 </tr>
 					 <tr>
                     <td>Current thiopurine dose</td>
@@ -795,7 +818,7 @@
                 </tr>
 					 <tr>
 						<td>Blood test abnormality in 6 months of primary care prescription</td>
-						<td>defined as neutrophil count &lt;2x10<sup>9</sup>/l or total leucocyte count &lt;4x10<sup>9</sup>/l, or platelet count &lt;150x10<sup>9</sup>/l or raised transaminase (ALT and/or AST &gt;35 IU/l)</td>
+						<td>Defined as neutrophil count &lt;2x10<sup>9</sup>/l or total leucocyte count &lt;4x10<sup>9</sup>/l, or platelet count &lt;150x10<sup>9</sup>/l or raised transaminase (ALT and/or AST &gt;35 IU/l)</td>
 					 </tr>
                 </tbody></table>
                 <a name="notes" id="notes"></a>

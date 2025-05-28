@@ -183,8 +183,8 @@
 				
 				if(7*dose<2.5 || 7*dose>25)
 				{
-					alert("The weekly dose must be at least 2.5mg and must not exceed 25mg");
-					return
+					alert("The weekly methotrexate dose must be at least 2.5mg and must not exceed 25mg");
+					return;
 				}
 				
 				if(!id("male").checked && !id("female").checked)
@@ -199,7 +199,7 @@
 				  -0.0100983*bmi +
 				  -0.0412595*id("female").checked +
 					0.0545787*id("smoker").checked +
-				  -0.0555338*(id("alcohol").value=="non") +
+				  -0.0555338*(id("alcohol").value=="ex") +
 				  -0.0745235*(id("alcohol").value=="low") +
 				  -0.2376144*(id("alcohol").value=="medium") +
 					0.1062592*(id("alcohol").value=="high") +
@@ -287,47 +287,7 @@
 				}
 		  }
 		  
-		  function hideArt()
-		  {
-				if(id("artyes").checked)
-				{
-					id("tissueno").disabled = true;
-					id("tissueyes").disabled = true;
-					id("bowelno").disabled = true;
-					id("bowelyes").disabled = true;
-					id("psono").disabled = true;
-					id("psoyes").disabled = true;
-					id("polyno").disabled = true;
-					id("polyyes").disabled = true;
-					
-					id("tissueno").checked = false;
-					id("tissueyes").checked = false;
-					id("bowelno").checked = false;
-					id("bowelyes").checked = false;
-					id("psono").checked = false;
-					id("psoyes").checked = false;
-					id("polyno").checked = false;
-					id("polyyes").checked = false;
-				}
-				else
-				{
-					id("tissueno").disabled = false;
-					id("tissueyes").disabled = false;
-					id("bowelno").disabled = false;
-					id("bowelyes").disabled = false;
-					id("psono").disabled = false;
-					id("psoyes").disabled = false;
-					id("polyno").disabled = false;
-					id("polyyes").disabled = false;
-					
-					id("tissueno").checked = true;
-					id("bowelno").checked = true;
-					id("psono").checked = true;
-					id("polyno").checked = true;
-				}
-			}
-				
-		  function hideTissue()
+		   function hideTissue()
 		  {
 				if(id("tissueyes").checked)
 				{
@@ -335,6 +295,8 @@
 					id("bowelyes").disabled = true;
 					id("psono").disabled = true;
 					id("psoyes").disabled = true;
+					id("artno").disabled = true;
+					id("artyes").disabled = true;
 					id("polyno").disabled = true;
 					id("polyyes").disabled = true;
 					
@@ -342,6 +304,8 @@
 					id("bowelyes").checked = false;
 					id("psono").checked = false;
 					id("psoyes").checked = false;
+					id("artno").checked = false;
+					id("artyes").checked = false;
 					id("polyno").checked = false;
 					id("polyyes").checked = false;
 				}
@@ -351,26 +315,33 @@
 					id("bowelyes").disabled = false;
 					id("psono").disabled = false;
 					id("psoyes").disabled = false;
+					id("artno").disabled = false;
+					id("artyes").disabled = false;
 					id("polyno").disabled = false;
 					id("polyyes").disabled = false;
 					
 					id("bowelno").checked = true;
 					id("psono").checked = true;
+					id("artno").checked = true;
 					id("polyno").checked = true;
 				}
 			}
-				
+			
 		  function hideBowel()
 		  {
 				if(id("bowelyes").checked)
 				{
 					id("psono").disabled = true;
 					id("psoyes").disabled = true;
+					id("artno").disabled = true;
+					id("artyes").disabled = true;
 					id("polyno").disabled = true;
 					id("polyyes").disabled = true;
 					
 					id("psono").checked = false;
 					id("psoyes").checked = false;
+					id("artno").checked = false;
+					id("artyes").checked = false;
 					id("polyno").checked = false;
 					id("polyyes").checked = false;
 				}
@@ -378,10 +349,13 @@
 				{
 					id("psono").disabled = false;
 					id("psoyes").disabled = false;
+					id("artno").disabled = false;
+					id("artyes").disabled = false;
 					id("polyno").disabled = false;
 					id("polyyes").disabled = false;
 					
 					id("psono").checked = true;
+					id("artno").checked = true;
 					id("polyno").checked = true;
 				}
 		  }
@@ -390,6 +364,32 @@
 		  {
 				if(id("psoyes").checked)
 				{
+					id("artno").disabled = true;
+					id("artyes").disabled = true;
+					id("polyno").disabled = true;
+					id("polyyes").disabled = true;
+					
+					id("artno").checked = false;
+					id("artyes").checked = false;
+					id("polyno").checked = false;
+					id("polyyes").checked = false;
+				}
+				else
+				{
+					id("artno").disabled = false;
+					id("artyes").disabled = false;
+					id("polyno").disabled = false;
+					id("polyyes").disabled = false;
+					
+					id("artno").checked = true;
+					id("polyno").checked = true;
+				}
+		  }
+		  
+		  function hideArt()
+		  {
+				if(id("artyes").checked)
+				{
 					id("polyno").disabled = true;
 					id("polyyes").disabled = true;
 					
@@ -400,10 +400,10 @@
 				{
 					id("polyno").disabled = false;
 					id("polyyes").disabled = false;
-					
+
 					id("polyno").checked = true;
 				}
-		  }
+			}
 		  
     </script>
 
@@ -434,15 +434,15 @@
   
 		<div id="menu">
 		 <ul>
-			  <li class="short"><a href="..">Home</a></li>
+			  <li class="short"><a href="../index.html">Home</a></li>
 		 </ul>
 		 <ul>
 			  <li class="wide"><a href="" class="droplink" onclick="return false">Calculation Tools</a>
 					<ul id="calc_countries">
 						 <li><a href="" class="sublink" onclick="return false">Methotrexate</a></li>
-						 <li><a href="../sulfasalazine" class="sublink">Sulfasalazine</a></li>
-						 <li><a href="../thiopurine" class="sublink">Thiopurine</a></li>
-						 <li><a href="../leflunomide" class="sublink">Leflunomide</a></li>
+						 <li><a href="../sulfasalazine/index.html" class="sublink">Sulfasalazine</a></li>
+						 <li><a href="../thiopurine/index.html" class="sublink">Thiopurine</a></li>
+						 <li><a href="../leflunomide/index.html" class="sublink">Leflunomide</a></li>
 					</ul>
 			  </li>
 		 </ul>
@@ -456,7 +456,7 @@
             <span id="timer"></span>
             <div id="rightdiv_tool">
 				
-                <div style="border: 1px solid #ccc; background: #FFF; padding: 20px; margin-top: 71px; margin-bottom:243px">
+                <div style="border: 1px solid #ccc; background: #FFF; padding: 20px; margin-top: 71px; margin-bottom:325px">
                     <h2>Weight Conversion</h2>
                     <p><b>Pounds</b> <img src="calc_arrow.png" style="margin: 0 10px 0 10px;" alt=""> <b>kg</b></p>
 
@@ -484,7 +484,9 @@
                 <h1>Calculation Tool</h1>
             </div>
 
-            <p>Please answer the questions below to calculate the risk.</p>                        
+				<p>This calculator is for educational purposes and for user feedback. <span style="color:red">It should not be used for patient care</span>. Contact  mavric@nottingham.ac.uk for any feedback. The mailbox is monitored intermittently. Do not send personal details.</p>
+
+            <p>Please answer the questions below to calculate the risk of stopping methotrexate due to blood-test abnormalities in the next 5 years.</p>                        
 
             <div id="ctl00_ContentPlaceHolder1_updCongrats">
 	                        
@@ -584,16 +586,6 @@
 						  <div class="input-wrap">
                         <div class="title">
                             <div class="question-number">7.</div>
-                            <div class="question-text">Rheumatoid arthritis</div>
-                        </div>
-                        <div class="input">
-                            <div class="radio"><input name="arthritis" type="radio" id="artno" onclick="hideArt()" checked><label for="artno">No</label></div>
-                            <div class="radio"><input name="arthritis" type="radio" id="artyes" onclick="hideArt()"><label for="artyes">Yes</label></div>
-                        </div>
-                    </div>
-						  <div class="input-wrap">
-                        <div class="title">
-                            <div class="question-number">8.</div>
                             <div class="question-text">Connective tissue disease</div>
                         </div>
                         <div class="input">
@@ -603,7 +595,7 @@
                     </div>
 						  <div class="input-wrap">
                         <div class="title">
-                            <div class="question-number">9.</div>
+                            <div class="question-number">8.</div>
                             <div class="question-text">Inflammatory Bowel Disease or Ankylosing spondylitis or Reactice arthritis</div>
                         </div>
                         <div class="input">
@@ -613,12 +605,22 @@
                     </div>
 						  <div class="input-wrap">
                         <div class="title">
-                            <div class="question-number">10.</div>
+                            <div class="question-number">9.</div>
                             <div class="question-text">Psoriasis or Psoriatic arthritis</div>
                         </div>
                         <div class="input">
                             <div class="radio"><input name="psoriasis" type="radio" id="psono" onclick="hidePso()" checked><label for="psono">No</label></div>
                             <div class="radio"><input name="psoriasis" type="radio" id="psoyes" onclick="hidePso()"><label for="psoyes">Yes</label></div>
+                        </div>
+                    </div>
+						   <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">10.</div>
+                            <div class="question-text">Rheumatoid arthritis</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="arthritis" type="radio" id="artno" onclick="hideArt()" checked><label for="artno">No</label></div>
+                            <div class="radio"><input name="arthritis" type="radio" id="artyes" onclick="hideArt()"><label for="artyes">Yes</label></div>
                         </div>
                     </div>
                     <div class="input-wrap">
@@ -792,8 +794,11 @@
             <!-- End Tool -->
             <p class="noPrint" style="text-align:right;margin-bottom:0;width:660px;"><a href="" onclick="window.print(); return false;" style="vertical-align:top;line-height:31px;color:#0C23FA;"><img src="printer.png" style="padding-right:5px;vertical-align:middle;">Print tool and information</a></p>
             <div id="noPrint">
-                <h2 class="large">Risk factors</h2>
-                <p>For the clinical risk factors a yes or no response is asked for. If the field is left blank, then a "no" response is assumed.<br><br>The risk factors used are the following:</p>
+                <h2 class="large">Footnotes</h2>
+                <p>
+						For the clinical risk factors a yes or no response is asked for. If the field is left blank, then a "no" response is assumed.<br>
+						For Questions 7 to 12, if multiple conditions are diagnosed, please select only the one listed first.
+					</p>
 
                 <br>
 
@@ -828,35 +833,31 @@
                 </tr>
                 <tr>
                     <td>Current smoking</td>
-                    <td>Enter yes or no depending on whether the patient currently smokes tobacco (see also notes on risk factors).</td>
+                    <td>Enter yes or no depending on whether the patient currently smokes tobacco.</td>
                 </tr>
                 <tr>
                     <td>Rheumatoid arthritis</td>
-                    <td>Enter yes where the patient has a confirmed diagnosis of rheumatoid arthritis. Otherwise enter no (see also notes on risk factors).</td>
+                    <td>Enter yes where the patient has a confirmed diagnosis of rheumatoid arthritis. Otherwise enter no.</td>
                 </tr>
 					 <tr>
                     <td>Connective Tissue Disease</td>
-                    <td>include lupus, systemic sclerosis, myositis, small vessel vasculitis; </td>
+                    <td>Include lupus, systemic sclerosis, myositis, small vessel vasculitis.</td>
                 </tr>
 					 <tr>
-						<td>Other seronegative spondyloarthritis</td>
-						<td>include ankyolosing spondylitis, reactive arthritis and inflammatory bowel disease</td>
-					 </tr>
-					 <tr>
-						<td>Chronic kidney disease</td>
+						<td>Chronic kidney disease stage 3</td>
 						<td>Patients with chronic kidney disease stage 4 or 5 were excluded and the model should not be applied to them</td>
 					 </tr>
 					 <tr>
-						<td>Other immune suppressing steroid-sparing agents</td>
-						<td>include leflunomide, azathioprine, cyclosporine, tacrolimus</td>
+						<td>Drugs</td>
+						<td>If currently prescribed.</td>
 					 </tr>
 					 <tr>
 						<td>Anti-epileptic drugs</td>
-						<td>include carbamazepine, levetiracetam, and sodium valproate</td>
+						<td>Include carbamazepine, levetiracetam, and sodium valproate.</td>
 					 </tr>
 					 <tr>
 						<td>Blood test abnormality in 6 months of primary care prescription</td>
-						<td>was defined as either cytopenia (neutrophil count &lt;2x10<sup>9</sup>/l, total leucocyte count &lt;4x10<sup>9</sup>/l, or platelet count &lt;150x10<sup>9</sup>/l) or elevated transaminase (ALT and/or AST &gt;35 IU/l) during the first 6 months of primary-care methotrexate prescription. If methotrexate is always prescribed from a hospital or specialist clinic, this parameter should be evaluated during first six month of methotrexate prescription at a stable dose</td>
+						<td>Was defined as either cytopenia (neutrophil count &lt;2x10<sup>9</sup>/l, total leucocyte count &lt;4x10<sup>9</sup>/l, or platelet count &lt;150x10<sup>9</sup>/l) or elevated transaminase (ALT and/or AST &gt;35 IU/l) during the first 6 months of primary-care methotrexate prescription. If methotrexate is always prescribed from a hospital or specialist clinic, this parameter should be evaluated during first six month of methotrexate prescription at a stable dose.</td>
 					 </tr>
                 </tbody></table>
                 <a name="notes" id="notes"></a>

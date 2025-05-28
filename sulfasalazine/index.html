@@ -61,6 +61,8 @@
 				id("diabetesno").disabled = false;
 				id("kidneyyes").disabled = false;
 				id("kidneyno").disabled = false;
+				id("liveryes").disabled = false;
+				id("liverno").disabled = false;
 				id("reactiveyes").disabled = false;
 				id("reactiveno").disabled = false;
 				id("bowelyes").disabled = false;
@@ -92,6 +94,7 @@
 				id("parano").checked = true;
 				id("diabetesno").checked = true;
 				id("kidneyno").checked = true;
+				id("liverno").checked = true;
 				id("reactiveno").checked = true;
 				id("lefno").checked = true;
 				id("azano").checked = true;
@@ -187,7 +190,8 @@
 				  -0.2949835*id("caryes").checked +
 					0.2214547*id("reactiveyes").checked +
 					0.0316689*id("psoyes").checked +
-				  -0.3052060*id("bowelyes").checked;
+				  -0.3052060*id("bowelyes").checked +
+				   1.0292450*id("liveryes").checked;
 					
 				id("wt").disabled = true;
 				id("ht").disabled = true;
@@ -213,6 +217,8 @@
 				id("diabetesno").disabled = true;
 				id("kidneyyes").disabled = true;
 				id("kidneyno").disabled = true;
+				id("liveryes").disabled = true;
+				id("liverno").disabled = true;
 				id("reactiveyes").disabled = true;
 				id("reactiveno").disabled = true;
 				id("bowelyes").disabled = true;
@@ -354,15 +360,15 @@
   
 		<div id="menu">
 		 <ul>
-			  <li class="short"><a href="..">Home</a></li>
+			  <li class="short"><a href="../index.html">Home</a></li>
 		 </ul>
 		 <ul>
 			  <li class="wide"><a href="" class="droplink" onclick="return false">Calculation Tools</a>
 					<ul id="calc_countries">
-						 <li><a href="../methotrexate" class="sublink">Methotrexate</a></li>
+						 <li><a href="../methotrexate/index.html" class="sublink">Methotrexate</a></li>
 						 <li><a href="" class="sublink" onclick="return false">Sulfasalazine</a></li>
-						 <li><a href="../thiopurine" class="sublink">Thiopurine</a></li>
-						 <li><a href="../leflunomidel" class="sublink">Leflunomide</a></li>
+						 <li><a href="../thiopurine/index.html" class="sublink">Thiopurine</a></li>
+						 <li><a href="../leflunomide/index.html" class="sublink">Leflunomide</a></li>
 					</ul>
 			  </li>
 		 </ul>
@@ -376,7 +382,7 @@
             <span id="timer"></span>
             <div id="rightdiv_tool">
 				
-                <div style="border: 1px solid #ccc; background: #FFF; padding: 20px; margin-top: 71px; margin-bottom:120px">
+                <div style="border: 1px solid #ccc; background: #FFF; padding: 20px; margin-top: 71px; margin-bottom:212px">
                     <h2>Weight Conversion</h2>
                     <p><b>Pounds</b> <img src="calc_arrow.png" style="margin: 0 10px 0 10px;" alt=""> <b>kg</b></p>
 
@@ -403,8 +409,10 @@
             <div>
                 <h1>Calculation Tool</h1>
             </div>
+				
+				<p>This calculator is for educational purposes and for user feedback. <span style="color:red">It should not be used for patient care</span>. Contact  mavric@nottingham.ac.uk for any feedback. The mailbox is monitored intermittently. Do not send personal details.</p>
 
-            <p>Please answer the questions below to calculate the risk.</p>                        
+            <p>Please answer the questions below to calculate the risk of stopping sulfasalazine due to blood-test abnormalities in the next 5 years.</p>                        
 
             <div id="ctl00_ContentPlaceHolder1_updCongrats">
 	                        
@@ -485,7 +493,7 @@
 						  <div class="input-wrap">
                         <div class="title">
                             <div class="question-number">5.</div>
-                            <div class="question-text">Reactive arthritis</div>
+                            <div class="question-text">Reactive arthritis/Ankylosing spondylitis</div>
                         </div>
                         <div class="input">
                             <div class="radio"><input name="reactive" type="radio" id="reactiveno" onclick="hideReactive()" checked><label for="reactiveno">No</label></div>
@@ -547,9 +555,19 @@
                 <!--            RIGHT CONTENT             -->
                 <!------------------------------------------>
                 <div class="tool-content-right">
-						  <div class="input-wrap">
+					  <div class="input-wrap">
                         <div class="title">
                             <div class="question-number">11.</div>
+                            <div class="question-text">Previous abnormal blood tests</div>
+                        </div>
+                        <div class="input">
+                            <div class="radio"><input name="liver" type="radio" id="liverno" checked><label for="liverno">No</label></div>
+                            <div class="radio"><input name="liver" type="radio" id="liveryes"><label for="liveryes">Yes</label></div>
+                        </div>
+                    </div>
+						  <div class="input-wrap">
+                        <div class="title">
+                            <div class="question-number">12.</div>
                             <div class="question-text">Statins</div>
                         </div>
                         <div class="input">
@@ -559,7 +577,7 @@
                     </div>
 						  <div class="input-wrap">
                         <div class="title">
-                            <div class="question-number">12.</div>
+                            <div class="question-number">13.</div>
                             <div class="question-text">Methotrexate</div>
                         </div>
                         <div class="input">
@@ -569,7 +587,7 @@
                     </div>
 						  <div class="input-wrap">
                         <div class="title">
-                            <div class="question-number">13.</div>
+                            <div class="question-number">14.</div>
                             <div class="question-text">Paracetamol</div>
                         </div>
                         <div class="input">
@@ -579,7 +597,7 @@
                     </div>
 						  <div class="input-wrap">
                         <div class="title">
-                            <div class="question-number">14.</div>
+                            <div class="question-number">15.</div>
                             <div class="question-text">Leflunomide</div>
                         </div>
                         <div class="input">
@@ -589,7 +607,7 @@
                     </div>
 						  <div class="input-wrap">
                         <div class="title">
-                            <div class="question-number">15.</div>
+                            <div class="question-number">16.</div>
                             <div class="question-text">Azathioprine or 6-Mercaptopurine</div>
                         </div>
                         <div class="input">
@@ -599,7 +617,7 @@
                     </div>
 						  <div class="input-wrap">
                         <div class="title">
-                            <div class="question-number">16.</div>
+                            <div class="question-number">17.</div>
                             <div class="question-text">Carbamazepine or Valproate</div>
                         </div>
                         <div class="input">
@@ -609,7 +627,7 @@
                     </div>
                     <div class="input-wrap">
                         <div class="title">
-                            <div class="question-number">17.</div>
+                            <div class="question-number">18.</div>
                             <div class="question-text">Alcohol Use</div>
                         </div>
 								 <div class="input">
@@ -653,8 +671,11 @@
             <!-- End Tool -->
             <p class="noPrint" style="text-align:right;margin-bottom:0;width:660px;"><a href="" onclick="window.print(); return false;" style="vertical-align:top;line-height:31px;color:#0C23FA;"><img src="printer.png" style="padding-right:5px;vertical-align:middle;">Print tool and information</a></p>
             <div id="noPrint">
-                <h2 class="large">Risk factors</h2>
-                <p>For the clinical risk factors a yes or no response is asked for. If the field is left blank, then a "no" response is assumed.<br><br>The risk factors used are the following:</p>
+                <h2 class="large">Footnotes</h2>
+                <p>
+						For the clinical risk factors a yes or no response is asked for. If the field is left blank, then a "no" response is assumed.<br>
+						For Questions 5 to 8, if multiple conditions are diagnosed, please select only the one listed first.
+					</p>
 
                 <br>
 
@@ -688,12 +709,16 @@
                     <td>More than 21 units per week.</td>
                 </tr>
                 <tr>
-                    <td>Rheumatoid arthritis</td>
-                    <td>Enter yes where the patient has a confirmed diagnosis of rheumatoid arthritis. Otherwise enter no (see also notes on risk factors).</td>
+                    <td>Inflammatory condition</td>
+                    <td>Enter yes where the patient has a confirmed diagnosis of rheumatoid arthritis. Otherwise enter no.</td>
                 </tr>
 					 <tr>
-						<td>Chronic kidney disease</td>
+						<td>Chronic kidney disease stage 3</td>
 						<td>Patients with chronic kidney disease stage 4 or 5 were excluded and the model should not be applied to them</td>
+					 </tr>
+					 <tr>
+						<td>Drugs</td>
+						<td>If currently prescribed.</td>
 					 </tr>
                 </tbody></table>
                 <a name="notes" id="notes"></a>

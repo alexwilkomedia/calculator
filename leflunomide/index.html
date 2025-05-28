@@ -180,7 +180,10 @@
 					0.3666838*id("statinyes").checked +
 					0.3747208*id("parayes").checked +
 				   1.479007*id("caryes").checked +
-					1.117226*id("bloodyes").checked;
+					1.117226*id("bloodyes").checked +
+					0.1266522*id("sponyes").checked + 
+					0.0269710*id("cellyes").checked +
+				  -0.1056694*id("smoker").checked;
 					
 				id("wt").disabled = true;
 				id("ht").disabled = true;
@@ -311,14 +314,14 @@
   
 		<div id="menu">
 		 <ul>
-			  <li class="short"><a href="..">Home</a></li>
+			  <li class="short"><a href="../index.html">Home</a></li>
 		 </ul>
 		 <ul>
 			  <li class="wide"><a href="" class="droplink" onclick="return false">Calculation Tools</a>
 					<ul id="calc_countries">
-						 <li><a href="../methotrexate" class="sublink">Methotrexate</a></li>
-						 <li><a href="../sulfasalazinel" class="sublink">Sulfasalazine</a></li>
-						 <li><a href="../thiopurine" class="sublink">Thiopurine</a></li>
+						 <li><a href="../methotrexate/index.html" class="sublink">Methotrexate</a></li>
+						 <li><a href="../sulfasalazine/index.html" class="sublink">Sulfasalazine</a></li>
+						 <li><a href="../thiopurine/index.html" class="sublink">Thiopurine</a></li>
 						 <li><a href="" class="sublink" onclick="return false">Leflunomide</a></li>
 					</ul>
 			  </li>
@@ -333,7 +336,7 @@
             <span id="timer"></span>
             <div id="rightdiv_tool">
 				
-                <div style="border: 1px solid #ccc; background: #FFF; padding: 20px; margin-top: 71px; margin-bottom:92px">
+                <div style="border: 1px solid #ccc; background: #FFF; padding: 20px; margin-top: 71px; margin-bottom:196px">
                     <h2>Weight Conversion</h2>
                     <p><b>Pounds</b> <img src="calc_arrow.png" style="margin: 0 10px 0 10px;" alt=""> <b>kg</b></p>
 
@@ -361,7 +364,9 @@
                 <h1>Calculation Tool</h1>
             </div>
 
-            <p>Please answer the questions below to calculate the risk.</p>                        
+				<p>This calculator is for educational purposes and for user feedback. <span style="color:red">It should not be used for patient care</span>. Contact  mavric@nottingham.ac.uk for any feedback. The mailbox is monitored intermittently. Do not send personal details.</p>
+
+            <p>Please answer the questions below to calculate the risk of stopping leflunomide due to blood-test abnormalities in the next 5 years.</p>                        
 
             <div id="ctl00_ContentPlaceHolder1_updCongrats">
 	                        
@@ -452,7 +457,7 @@
 						  <div class="input-wrap">
                         <div class="title">
                             <div class="question-number">6.</div>
-                            <div class="question-text">Ankylosing spondylitis</div>
+                            <div class="question-text">Ankylosing spondylitis/Axial Spondyloarthritis</div>
                         </div>
                         <div class="input">
                             <div class="radio"><input name="spon" type="radio" id="sponno" onclick="hideSpon()" checked><label for="sponno">No</label></div>
@@ -462,7 +467,7 @@
 						  <div class="input-wrap">
                         <div class="title">
                             <div class="question-number">7.</div>
-                            <div class="question-text">Giant Cell Arteritis</div>
+                            <div class="question-text">Polymyalgia Rheumatica/Giant Cell Arteritis</div>
                         </div>
                         <div class="input">
                             <div class="radio"><input name="cell" type="radio" id="cellno" onclick="hideCell()" checked><label for="cellno">No</label></div>
@@ -517,7 +522,7 @@
 						  <div class="input-wrap">
                         <div class="title">
                             <div class="question-number">12.</div>
-                            <div class="question-text">Methotrexate</div>
+                            <div class="question-text">Methotrexate or Aminosalicylates</div>
                         </div>
                         <div class="input">
                             <div class="radio"><input name="metho" type="radio" id="methono" checked><label for="methono">No</label></div>
@@ -600,8 +605,11 @@
             <!-- End Tool -->
             <p class="noPrint" style="text-align:right;margin-bottom:0;width:660px;"><a href="" onclick="window.print(); return false;" style="vertical-align:top;line-height:31px;color:#0C23FA;"><img src="printer.png" style="padding-right:5px;vertical-align:middle;">Print tool and information</a></p>
             <div id="noPrint">
-                <h2 class="large">Risk factors</h2>
-                <p>For the clinical risk factors a yes or no response is asked for. If the field is left blank, then a "no" response is assumed.<br><br>The risk factors used are the following:</p>
+                <h2 class="large">Footnotes</h2>
+                <p>
+						For the clinical risk factors a yes or no response is asked for. If the field is left blank, then a "no" response is assumed.<br>
+						For Questions 6 to 8, if multiple conditions are diagnosed, please select only the one listed first.
+					 </p>
 
                 <br>
 
@@ -635,20 +643,28 @@
                     <td>More than 21 units per week.</td>
                 </tr>
                 <tr>
-                    <td>Rheumatoid arthritis</td>
+                    <td>Inflammatory condition</td>
                     <td>Enter yes where the patient has a confirmed diagnosis of rheumatoid arthritis. Otherwise enter no (see also notes on risk factors).</td>
                 </tr>
 					 <tr>
-						<td>Chronic kidney disease</td>
+						<td>Chronic kidney disease stage 3</td>
 						<td>Patients with chronic kidney disease stage 4 or 5 were excluded and the model should not be applied to them</td>
 					 </tr>
 					 <tr>
+						<td>Drugs</td>
+						<td>If currently prescribed.</td>
+					 </tr>
+					 <tr>
                     <td>Current smoking</td>
-                    <td>Enter yes or no depending on whether the patient currently smokes tobacco (see also notes on risk factors).</td>
+                    <td>Enter yes or no depending on whether the patient currently smokes tobacco.</td>
                 </tr>
 					 <tr>
 						<td>Blood test abnormality in 6 months of primary care prescription</td>
-						<td>defined as neutrophil count &lt;2x10<sup>9</sup>/l or total leucocyte count &lt;4x10<sup>9</sup>/l, or platelet count &lt;150x10<sup>9</sup>/l or raised transaminase (ALT and/or AST &gt;35 IU/l)</td>
+						<td>Defined as neutrophil count &lt;2x10<sup>9</sup>/l or total leucocyte count &lt;4x10<sup>9</sup>/l, or platelet count &lt;150x10<sup>9</sup>/l or raised transaminase (ALT and/or AST &gt;35 IU/l)</td>
+					 </tr>
+					 <tr>
+						<td>Seronegative Spondyloarthritis</td>
+						<td>Includes ankylosing spondylitis, psoriatic arthritis, or reactive arthritis</td>
 					 </tr>
                 </tbody></table>
                 <a name="notes" id="notes"></a>
